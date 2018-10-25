@@ -294,6 +294,7 @@ svg {
     & * {
         color: rgb(69, 63, 107);
         font-size: 12px;
+        line-height: inherit;
     }
 
     .visitor & {
