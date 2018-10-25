@@ -1,7 +1,7 @@
 import '@babel/polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Widget from 'components/Widget'
+import ChatWidget from 'components/Widget'
 import { Provider } from 'react-redux'
 import ChatStore from 'stores/ChatStore'
 
@@ -17,7 +17,7 @@ function initialize() {
   // Render the main component into the dom
   ReactDOM.render(
     <Provider store={ChatStore}>
-      <Widget />
+      <ChatWidget />
     </Provider>,
     widget
   )
