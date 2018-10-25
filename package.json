@@ -1,6 +1,6 @@
 {
   "name": "@hype/chat-widget",
-  "version": "0.1.0-rc.4",
+  "version": "0.1.0-rc.6",
   "description": "Zopim + QnA Chat Web Widget (React)",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -20,10 +20,10 @@
     "serve": "node server.js --env=dev",
     "serve:dist": "node server.js --env=dist",
     "start": "node server.js --env=dev",
-    "postinstall": "curl -o ./vendor/web-sdk.js https://dev.zopim.com/web-sdk/latest/web-sdk.js",
+    "postinstall": "[[ ! -d ./vendor ]] && curl -o ./vendor/web-sdk.js https://dev.zopim.com/web-sdk/latest/web-sdk.js",
     "heroku-postbuild": "npm run dist",
     "precommit": "lint-staged",
-    "prepublishOnly": "npm run dist && cp -R ./dist/lib ./"
+    "prepublishOnly": "rimraf lib/* && npm run dist && mv ./dist/lib ./"
   },
   "repository": "",
   "keywords": [],
