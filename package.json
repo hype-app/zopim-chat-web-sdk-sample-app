@@ -1,6 +1,5 @@
 {
   "name": "@hype/chat-widget",
-  "private": true,
   "version": "0.0.1",
   "description": "Zopim + QnA Chat Web Widget (React)",
   "main": "",
