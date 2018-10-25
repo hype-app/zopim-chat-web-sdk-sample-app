@@ -33,6 +33,8 @@ bower_components/
 
 dist/
 
+lib/
+
 vendor/web-sdk.js
 
 # Cache files for Sublime Text
