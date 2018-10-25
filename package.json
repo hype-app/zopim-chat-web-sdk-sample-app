@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "clean": "rimraf dist/*",
-    "copy": "copyfiles -f ./src/index.html ./dist",
+    "copy": "copyfiles -f ./src/index.html ./package.json ./dist",
     "dist": "npm run copy & webpack --env=dist",
     "lint": "eslint ./src",
     "posttest": "npm run lint",
@@ -15,8 +15,7 @@
     "start": "node server.js --env=dev",
     "postinstall": "curl -o ./vendor/web-sdk.js https://dev.zopim.com/web-sdk/latest/web-sdk.js",
     "heroku-postbuild": "npm run dist",
-    "precommit": "lint-staged",
-    "prepublishOnly": "npm run dist"
+    "precommit": "lint-staged"
   },
   "repository": "",
   "keywords": [],

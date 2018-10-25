@@ -16,8 +16,8 @@ module.exports = {
   devtool: 'eval',
   output: {
     path: path.join(__dirname, '/../dist'),
-    filename: 'lib/widget.js',
-    library: 'widget',
+    filename: 'lib/index.js',
+    library: 'chat-widget',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     publicPath: defaultSettings.publicPath
