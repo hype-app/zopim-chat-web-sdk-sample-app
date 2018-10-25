@@ -15,8 +15,11 @@ module.exports = {
   mode: 'development',
   devtool: 'eval',
   output: {
-    path: path.join(__dirname, '/../dist/assets'),
-    filename: 'widget.js',
+    path: path.join(__dirname, '/../dist'),
+    filename: 'lib/widget.js',
+    library: 'widget',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
     publicPath: defaultSettings.publicPath
   },
   devServer: {

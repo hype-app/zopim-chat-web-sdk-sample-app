@@ -31,7 +31,7 @@ const config = Object.assign({}, baseConfig, {
     new CopyWebpackPlugin([
       {
         from: 'src/assets/fonts/**/*',
-        to: 'fonts',
+        to: 'assets/fonts',
         flatten: true
       }
     ])
