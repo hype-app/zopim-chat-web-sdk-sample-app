@@ -1,6 +1,6 @@
 {
   "name": "@hype/chat-widget",
-  "version": "0.1.0-rc.6",
+  "version": "0.1.0-rc.7",
   "description": "Zopim + QnA Chat Web Widget (React)",
   "main": "lib/index.js",
   "module": "es/index.js",
