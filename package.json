@@ -1,8 +1,15 @@
 {
   "name": "@hype/chat-widget",
-  "version": "0.1.0-rc.3",
+  "version": "0.1.0-rc.4",
   "description": "Zopim + QnA Chat Web Widget (React)",
-  "main": "",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "files": [
+    "css",
+    "es",
+    "lib",
+    "umd"
+  ],
   "license": "ISC",
   "scripts": {
     "clean": "rimraf dist/*",
