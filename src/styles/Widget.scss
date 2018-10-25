@@ -291,6 +291,11 @@ svg {
     margin: 0;
     padding: 8px;
 
+    & * {
+        color: rgb(69, 63, 107);
+        font-size: 12px;
+    }
+
     .visitor & {
         background: rgb(244, 244, 244);
     }
