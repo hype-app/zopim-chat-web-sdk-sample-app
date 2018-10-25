@@ -16,8 +16,7 @@
     "postinstall": "curl -o ./vendor/web-sdk.js https://dev.zopim.com/web-sdk/latest/web-sdk.js",
     "heroku-postbuild": "npm run dist",
     "precommit": "lint-staged",
-    "prepublishOnly": "npm run dist",
-    "publish:lib": "copyfiles -f ./package.json ./dist && npm publish dist"
+    "publish:lib": "npm run dist && copyfiles -f ./package.json ./dist && npm publish dist"
   },
   "repository": "",
   "keywords": [],
