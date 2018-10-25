@@ -6,11 +6,11 @@ import { Provider } from 'react-redux'
 import ChatStore from 'stores/ChatStore'
 
 function initialize() {
-  let widget = document.getElementById('widget')
+  let widget = document.getElementById('chat-widget')
 
   if (!widget) {
     widget = document.createElement('div')
-    widget.id = 'widget'
+    widget.id = 'chat-widget'
     document.body.appendChild(widget)
   }
 
