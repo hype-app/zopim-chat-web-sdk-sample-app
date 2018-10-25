@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Zopim + QnA Chat Web Widget (React)",
   "main": "",
+  "license": "ISC",
   "scripts": {
     "clean": "rimraf dist/*",
     "copy": "copyfiles -f ./src/index.html ./dist",
