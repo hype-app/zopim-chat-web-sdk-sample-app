@@ -1,26 +1,24 @@
 import '@babel/polyfill'
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import ChatWidget from 'components/Widget'
+import Widget from 'components/Widget'
 import { Provider } from 'react-redux'
 import ChatStore from 'stores/ChatStore'
+import { throwIfMissing } from 'utils'
 
-function initialize() {
-  let widget = document.getElementById('chat-widget')
+export default class ChatWidget extends Component {
+  static init = config => {
+    const { selector = throwIfMissing('selector') } = config
 
-  if (!widget) {
-    widget = document.createElement('div')
-    widget.id = 'chat-widget'
-    document.body.appendChild(widget)
+    ReactDOM.render(
+      <Provider store={ChatStore}>
+        <Widget />
+      </Provider>,
+      document.querySelector(selector)
+    )
   }
 
-  // Render the main component into the dom
-  ReactDOM.render(
-    <Provider store={ChatStore}>
-      <ChatWidget />
-    </Provider>,
-    widget
-  )
+  render() {
+    return <Widget />
+  }
 }
-
-window.onload = initialize
