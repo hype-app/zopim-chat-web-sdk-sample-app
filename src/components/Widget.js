@@ -13,7 +13,6 @@ import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-// import Holidays from 'date-holidays'
 
 const { ENV, THEME } = config
 
@@ -529,7 +528,6 @@ class App extends Component {
         }
 
       try {
-        // const hd = new Holidays('IT')
         const time = this.getServerTime()
         const startTime = moment(settings.startTime, 'HH:mm').toDate()
         const endTime = moment(settings.endTime, 'HH:mm').toDate()
@@ -541,9 +539,7 @@ class App extends Component {
           time.isAfter(startTime) &&
           time.isBefore(endTime) &&
           time.day() !== 6 &&
-          time.day() !== 0 //&&
-        // check if date is a holiday while respecting timezones
-        // !hd.isHoliday(time.toDate())
+          time.day() !== 0
 
         const availableUntil = endTime
 

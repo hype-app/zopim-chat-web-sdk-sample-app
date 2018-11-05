@@ -1297,11 +1297,6 @@ assign-symbols@^1.0.0:
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
 
-astronomia@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/astronomia/-/astronomia-2.0.1.tgz#11187803dae91cd5464afb1fa7ba532752e38d17"
-  integrity sha512-BJK2jVBDHRyTKoqG98L1IGavFvrW3i2I1V+eZlHVzTD3BWam3menQiIGEWXDOG5jUztEhjLObqgspZdApcwOQA==
-
 async-each@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/async-each/-/async-each-1.0.1.tgz#19d386a1d9edc6e7c1c85d388aedbcc56d33602d"
@@ -1644,13 +1639,6 @@ cache-base@^1.0.1:
     to-object-path "^0.3.0"
     union-value "^1.0.0"
     unset-value "^1.0.0"
-
-caldate@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/caldate/-/caldate-1.0.2.tgz#08849473606be9fdf7a5d814692c488fb1df6358"
-  integrity sha512-vYtcQklv7HU8bZ92EwW41Q9Wp1KvWpLO9xRoT4e357ZSXx2x0udmGvJqsmdLxD6bVFJm2JeT7hsWz9jaVEzwRA==
-  dependencies:
-    moment-timezone "^0.5.14"
 
 caller-path@^0.1.0:
   version "0.1.0"
@@ -2228,48 +2216,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-date-chinese@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/date-chinese/-/date-chinese-1.0.5.tgz#3cb98dae85aed9b8b795e65241077f9c8e4186b7"
-  integrity sha512-yAZmgcYkqShcS/7gSpXYox385QSTPPIIPzSmXqX25phZLVWgROmWcI7i8E9E+kBxtfDocV30Qn8C7j4U5Z1brA==
-  dependencies:
-    astronomia "^2.0.0"
-
-date-easter@^0.2.2:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/date-easter/-/date-easter-0.2.3.tgz#82f70bacccf7ba43f48722447c7c34df18e5037c"
-  integrity sha512-p9ZVCgEyFM9pdFyGtRmMOaxyzGemP/ceGfi7Q0Z902inlaLMESHVK551aHKntgLCC+aXCN0xJHNJZyg599NtzQ==
-
 date-fns@^1.27.2:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
   integrity sha512-lbTXWZ6M20cWH8N9S6afb0SBm6tMk+uUg6z3MqHPKE9atmsY3kJkTm8vKe93izJ2B2+q5MV990sM2CHgtAZaOw==
-
-date-holidays-parser@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/date-holidays-parser/-/date-holidays-parser-1.2.2.tgz#67001572b652e437cf8a034d8e20d852c16ee696"
-  integrity sha512-S3M4eWsfyGgu5iFsugK/vRILyUFE172CXv0hrIRVC0nHm3MopLgx1IapoHoQhS1pDEY0hrWeC31D4MeSfcSv3A==
-  dependencies:
-    astronomia "^2.0.0"
-    caldate "^1.0.2"
-    date-chinese "^1.0.5"
-    date-easter "^0.2.2"
-    lodash.get "^4.4.2"
-    lodash.merge "^4.6.1"
-    lodash.omit "^4.5.0"
-    lodash.set "^4.3.2"
-    moment-timezone "^0.5.14"
-
-date-holidays@^1.2.8:
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/date-holidays/-/date-holidays-1.2.8.tgz#c85ad4df91a4450d45781e6bf3e7ca24da217b51"
-  integrity sha512-JJZULggoLUhUZIjAcKssXlyOkCpGMGuXE2ts+7Y1mcsaB/mCB6s26e6ew1SIq2e0l7siQj/TzWRhrEBZizggBg==
-  dependencies:
-    date-holidays-parser "^1.2.2"
-    js-yaml "^3.12.0"
-    lodash.omit "^4.5.0"
-    lodash.pick "^4.4.0"
-    prepin "^1.0.1"
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -4459,35 +4409,10 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
-lodash.get@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
-  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
-
-lodash.merge@^4.6.1:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
-  integrity sha512-AOYza4+Hf5z1/0Hztxpm2/xiPZgi/cjMqdnKTUWTBSKchJlxXXuUSxCCl8rJlf4g6yww/j6mA8nC8Hw/EZWxKQ==
-
 lodash.mergewith@^4.6.0:
   version "4.6.1"
   resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.1.tgz#639057e726c3afbdb3e7d42741caa8d6e4335927"
   integrity sha512-eWw5r+PYICtEBgrBE5hhlT6aAa75f411bgDz/ZL2KZqYV03USvucsxcHUIlGTDTECs1eunpI7HOV7U+WLDvNdQ==
-
-lodash.omit@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.omit/-/lodash.omit-4.5.0.tgz#6eb19ae5a1ee1dd9df0b969e66ce0b7fa30b5e60"
-  integrity sha1-brGa5aHuHdnfC5aeZs4Lf6MLXmA=
-
-lodash.pick@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/lodash.pick/-/lodash.pick-4.4.0.tgz#52f05610fff9ded422611441ed1fc123a03001b3"
-  integrity sha1-UvBWEP/53tQiYRRB7R/BI6AwAbM=
-
-lodash.set@^4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
-  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
 
 lodash.tail@^4.1.1:
   version "4.1.1"
@@ -4803,14 +4728,7 @@ mobile-detect@^1.4.3:
   resolved "https://registry.yarnpkg.com/mobile-detect/-/mobile-detect-1.4.3.tgz#e436a3839f5807dd4d3cd4e081f7d3a51ffda2dd"
   integrity sha512-UaahPNLllQsstHOEHAmVnTHCMQrAS9eL5Qgdi50QrYz6UgGk+Xziz2udz2GN6NYcyODcPLnasC7a7s6R2DjiaQ==
 
-moment-timezone@^0.5.14:
-  version "0.5.21"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.21.tgz#3cba247d84492174dbf71de2a9848fa13207b845"
-  integrity sha512-j96bAh4otsgj3lKydm3K7kdtA3iKf2m6MY2iSYCzCm5a1zmHo1g+aK3068dDEeocLZQIS9kU8bsdQHLqEvgW0A==
-  dependencies:
-    moment ">= 2.9.0"
-
-"moment@>= 2.9.0", moment@^2.22.2:
+moment@^2.22.2:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
   integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
@@ -5640,11 +5558,6 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
-
-prepin@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/prepin/-/prepin-1.0.1.tgz#cd41e027fd5b4cc28ce591639bb7b14d2f4f0618"
-  integrity sha1-zUHgJ/1bTMKM5ZFjm7exTS9PBhg=
 
 prettier-linter-helpers@^1.0.0:
   version "1.0.0"
