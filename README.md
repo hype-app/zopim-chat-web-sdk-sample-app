@@ -1,10 +1,10 @@
 ⚠️ Use of this software is subject to important terms and conditions as set forth in the License file ⚠️
 
-# Zendesk Chat Web SDK Sample App
+# Helpdesk Chat Widget powered by Zendesk Chat Web SDK and Microsoft QnA Bot
 
-This sample app demonstrates how to build a simple chat widget using the [Zendesk Chat Web SDK](https://api.zopim.com/web-sdk).
+This app deploys a simple chat widget using the [Zendesk Chat Web SDK](https://api.zopim.com/web-sdk) and the [Microsoft QnA API](https://azure.microsoft.com/it-it/services/cognitive-services/qna-maker/).
 
-The sample app is built using the [React](https://facebook.github.io/react/) framework and [Redux](http://redux.js.org/) architecture. However, you are free to use any other JavaScript framework to develop your own chat widget.
+Built using the [React](https://facebook.github.io/react/) framework and [Redux](http://redux.js.org/) architecture.
 
 Screenshots:
 
@@ -24,7 +24,9 @@ npm install
 ```
 to install all the dependencies.
 
-Next, download the latest version of the SDK (refer to the [Getting the SDK](https://api.zopim.com/web-sdk/#getting-the-sdk) section of the documentation). Make sure the file is named `web-sdk.js` and place it in the `vendor` folder.
+A postinstall script should automatically download the latest version of the SDK (refer to the [Getting the SDK](https://api.zopim.com/web-sdk/#getting-the-sdk) section of the documentation).
+
+Make sure the downloaded file is named `web-sdk.js` and located in the `vendor` folder, otherwise download and place it there manually.
 
 ### Running
 To compile and run the sample app, run the following command:
@@ -34,7 +36,7 @@ npm start
 
 This would open your browser pointing at [127.0.0.1:8000](http://127.0.0.1:8000).
 
-### Configuration
+### Configuration (deprecated)
 To set your Zendesk Chat account key, navigate to the configuration file at [`src/config/base.js`](src/config/base.js).
 
 Modify the content of the file as follows:
@@ -43,6 +45,9 @@ export default {
 	ACCOUNT_KEY: 'YOUR_ACCOUNT_KEY'
 }
 ```
+
+### Configuration
+All the configuration parameters should be set in the init method.
 
 ## Compiling the Widget
 To compile the the widget, run `npm run dist`.
@@ -64,7 +69,8 @@ Pull requests are welcome.
 Please submit bug reports to [Zendesk](https://support.zendesk.com/requests/new).
 
 ## License
-Copyright 2016 Zendesk, Inc.
+Copyright &copy; 2016 Zendesk, Inc.
+Modifications copyright &copy; 2018 Bemind Interactive, srl.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 
