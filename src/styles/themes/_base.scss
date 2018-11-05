@@ -10,10 +10,10 @@ $theme-color: $hype-theme-color;
     background-color: $theme-color;
 }
 
-// .rating-button {
-//   padding: 0;
-//   border: none;
-// }
+.rating-button {
+  padding: 0;
+  border: none;
+}
 
 .rating-button.selected {
     background-color: $theme-color;
