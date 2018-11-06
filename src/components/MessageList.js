@@ -126,17 +126,6 @@ class MessageList extends Component {
       if (!messages) {
         messages = []
       }
-
-      if (messages.length === 0) {
-        messages.splice(0, 0, {
-          type: 'chat.msg',
-          display_name: 'Hype Bot',
-          nick: 'agent:trigger:Hype Bot',
-          timestamp: +new Date(),
-          member_type: 'agent',
-          msg: 'Ciao sono Hype Bot e puoi chiedermi quello che vuoi!'
-        })
-      }
     }
 
     let prev = null

@@ -102,6 +102,22 @@ class App extends Component {
       const [lastMessage] =
         nextProps.data && nextProps.data.chats.toArray().slice(-1)
 
+      if (!!nextProps.data.chatbot.active) {
+        if (!lastMessage) {
+          this.props.dispatch({
+            type: 'chat',
+            detail: {
+              type: 'chat.msg',
+              nick: 'agent:trigger:Hype Bot',
+              display_name: 'Hype Bot',
+              member_type: 'agent',
+              timestamp: +new Date(),
+              msg: 'Ciao sono Hype Bot e puoi chiedermi quello che vuoi!'
+            }
+          })
+        }
+      }
+
       if (!!lastMessage) {
         if (!nextProps.data.chatbot.active) {
           /**
