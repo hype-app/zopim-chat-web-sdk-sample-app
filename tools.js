@@ -22,9 +22,15 @@ function purgeCdn() {
     })
   }
 
-  fetch('http://purge.jsdelivr.net/', options)
-    .then(res => res.json())
-    .then(json => console.log(json))
+  console.log('purging jsdelivr cdn cache...')
+
+  return fetch('http://purge.jsdelivr.net/', options)
+    .then(res => {
+      if (res.status !== 200) {
+        throw res.json()
+      }
+      console.log('purged jsdelivr cdn cache')
+    })
     .catch(err => console.error(err))
 }
 
@@ -32,6 +38,8 @@ function downloadZendeskSdk() {
   const fs = require('fs')
 
   const file = fs.createWriteStream('./vendor/web-sdk.js')
+
+  console.log('downloading zendesk web sdk...')
 
   return fetch('https://dev.zopim.com/web-sdk/latest/web-sdk.js')
     .then(res => res.pipe(file))
