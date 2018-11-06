@@ -18,11 +18,11 @@ function purgeCdn() {
     },
     body: JSON.stringify({
       path: [
-        `/npm/${conf.name}`,
+        `/npm/${conf.name}/dist/assets/widget.js`,
         `/npm/${conf.name}@${conf.version.replace(
           /(\d+\.\d+)\.\d+(?:\-.*)?/,
           '$1'
-        )}`
+        )}/dist/assets/widget.js`
       ]
     })
   }
