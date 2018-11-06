@@ -20,7 +20,8 @@
     "postinstall": "curl -o ./vendor/web-sdk.js https://dev.zopim.com/web-sdk/latest/web-sdk.js",
     "heroku-postbuild": "npm run dist",
     "precommit": "lint-staged",
-    "prepublishOnly": "npm run clean && npm run dist"
+    "prepublishOnly": "npm run clean && npm run dist",
+    "postpublish": "node ./tools/purge-cdn.js"
   },
   "repository": "",
   "keywords": [],
