@@ -7,7 +7,7 @@ import StatusContainer from 'components/StatusContainer'
 import MessageList from 'components/MessageList'
 import ChatButton from 'components/ChatButton'
 import Input from 'components/Input'
-import { log, get, set, isAgent, anyHumanAgent } from 'utils'
+import { log, get, set, isAgent, isTrigger, anyHumanAgent } from 'utils'
 import { debounce } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
@@ -161,7 +161,7 @@ class App extends Component {
             case 'chat.file':
             case 'chat.request.rating':
             case 'chat.msg':
-              if (isAgent(lastMessage.nick)) {
+              if (isAgent(lastMessage.nick) && !isTrigger(lastMessage.nick)) {
                 this.setVisible(true)
               }
           }
