@@ -55,7 +55,7 @@ program.version(conf.version).usage('[options] <command>')
 program
   .command('purge-cdn')
   .alias('pcdn')
-  .description('purges the cdn cache')
+  .description('purges the jsdelivr cdn cache')
   .action(() => {
     purgeCdn()
   })
@@ -70,7 +70,7 @@ program
   .command('download-zendesk-sdk')
   .alias('dzs')
   .description(
-    'clears weblogic cache updating a comment containing the project version in weblogic.xml and web.xml files'
+    'downloads the zendesk chat web sdk and places it under the vendor folder'
   )
   .action(() => {
     downloadZendeskSdk()
