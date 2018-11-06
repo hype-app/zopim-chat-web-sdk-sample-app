@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 /*eslint no-console:0 */
 const program = require('commander')
-const fetch = require('isomorphic-fetch')
 const conf = require('./package.json')
+const request = require('request')
+const fs = require('fs')
+const { promisify } = require('util')
+const requestPromiseFactory = promisify(request)
+const writeFilePromiseFactory = promisify(fs.writeFile)
 
 function purgeCdn() {
-  var options = {
+  const options = {
     method: 'POST',
+    url: 'http://purge.jsdelivr.net/',
     headers: {
       'content-type': 'application/json',
       'cache-control': 'no-cache'
@@ -24,30 +29,44 @@ function purgeCdn() {
 
   console.log('purging jsdelivr cdn cache...')
 
-  return fetch('http://purge.jsdelivr.net/', options)
+  return requestPromiseFactory(options)
     .then(res => {
-      if (res.status !== 200) {
-        throw res.json()
+      console.log(res.status)
+
+      if (res.statusCode !== 200) {
+        throw new Error('fetch error')
       }
       console.log('purged jsdelivr cdn cache')
     })
-    .catch(err => console.error(err))
+    .catch(err => {
+      console.error(err)
+      process.exitCode = 1
+    })
 }
 
 function downloadZendeskSdk() {
-  const fs = require('fs')
-
-  const file = fs.createWriteStream('./vendor/web-sdk.js')
-
   console.log('downloading zendesk web sdk...')
 
-  return fetch('https://dev.zopim.com/web-sdk/latest/web-sdk.js')
-    .then(res =>
-      res.body
-        .pipe(file)
-        .on('close', () => console.log('downloaded zendesk web sdk'))
-    )
-    .catch(err => console.error(err))
+  const options = {
+    method: 'GET',
+    url: 'https://dev.zopim.com/web-sdk/latest/web-sdk.js',
+    headers: {
+      'cache-control': 'no-cache'
+    }
+  }
+
+  return requestPromiseFactory(options)
+    .then(res => {
+      if (res.statusCode !== 200) {
+        throw new Error('fetch error')
+      }
+
+      return writeFilePromiseFactory('./vendor/web-sdk.js', res.body)
+    })
+    .catch(err => {
+      console.error(err)
+      process.exitCode = 1
+    })
 }
 
 program.version(conf.version).usage('[options] <command>')
