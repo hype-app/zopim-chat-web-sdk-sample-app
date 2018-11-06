@@ -37,15 +37,16 @@ function purgeCdn() {
 function downloadZendeskSdk() {
   const fs = require('fs')
 
+  const file = fs.createWriteStream('./vendor/web-sdk.js')
+
   console.log('downloading zendesk web sdk...')
 
   return fetch('https://dev.zopim.com/web-sdk/latest/web-sdk.js')
-    .then(res => res.blob())
-    .then(blob => {
-      fs.writeFile('./vendor/web-sdk.js', blob)
-      console.log('downloaded zendesk web sdk')
-      return blob
-    })
+    .then(res =>
+      res.body
+        .pipe(file)
+        .on('close', () => console.log('downloaded zendesk web sdk'))
+    )
     .catch(err => console.error(err))
 }
 
