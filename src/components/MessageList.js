@@ -77,11 +77,13 @@ class MessageList extends Component {
         )
       case 'offline':
         return (
-          <OfflineForm
-            title={msg.msg}
-            subTitle={msg.subMsg}
-            key={msg.type + msg.timestamp}
-          />
+          !msg.hidden && (
+            <OfflineForm
+              title={msg.msg}
+              subTitle={msg.subMsg}
+              key={msg.type + msg.timestamp}
+            />
+          )
         )
       case 'prechat':
         return (

@@ -134,7 +134,7 @@ function update(state = DEFAULT_STATE, action) {
             action.detail.type === 'chat.msg'
           ) {
             new_state.chats = new_state.chats.map(c => {
-              if (c.type === 'prechat') {
+              if (c.type === 'prechat' || c.type === 'offline') {
                 c.hidden = true
               }
             })
