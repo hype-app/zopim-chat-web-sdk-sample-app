@@ -108,7 +108,7 @@ class App extends Component {
             type: 'chat',
             detail: {
               type: 'chat.msg',
-              nick: 'agent:trigger:qnabot',
+              nick: `agent:trigger:${nextProps.botName}`,
               display_name: nextProps.botName,
               member_type: 'agent',
               timestamp: +new Date(),
@@ -163,7 +163,10 @@ class App extends Component {
             case 'chat.file':
             case 'chat.request.rating':
             case 'chat.msg':
-              if (isAgent(lastMessage.nick) && !isChatBot(lastMessage.nick)) {
+              if (
+                isAgent(lastMessage.nick) &&
+                !isChatBot(lastMessage.nick, nextProps.botName)
+              ) {
                 this.setVisible(true)
               }
           }
@@ -228,7 +231,7 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'typing',
-          nick: 'agent:trigger:qnabot',
+          nick: `agent:trigger:${this.props.botName}`,
           typing: true
         }
       })
@@ -241,7 +244,7 @@ class App extends Component {
               type: 'chat',
               detail: {
                 type: 'chat.msg',
-                nick: 'agent:trigger:qnabot',
+                nick: `agent:trigger:${this.props.botName}`,
                 display_name: this.props.botName,
                 member_type: 'agent',
                 timestamp: +new Date(),
@@ -254,7 +257,7 @@ class App extends Component {
               type: 'chat',
               detail: {
                 type: 'chat.msg',
-                nick: 'agent:trigger:qnabot',
+                nick: `agent:trigger:${this.props.botName}`,
                 display_name: this.props.botName,
                 member_type: 'agent',
                 timestamp: +new Date(),
@@ -269,7 +272,7 @@ class App extends Component {
             type: 'chat',
             detail: {
               type: 'typing',
-              nick: 'agent:trigger:qnabot',
+              nick: `agent:trigger:${this.props.botName}`,
               typing: false
             }
           })
@@ -285,7 +288,7 @@ class App extends Component {
               type: 'chat',
               detail: {
                 type: 'typing',
-                nick: 'agent:trigger:qnabot',
+                nick: `agent:trigger:${this.props.botName}`,
                 typing: false
               }
             })
@@ -371,7 +374,7 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'prechat',
-          nick: 'agent:trigger:qnabot',
+          nick: `agent:trigger:${this.props.botName}`,
           display_name: this.props.botName,
           member_type: 'agent',
           timestamp: +new Date(),
@@ -385,7 +388,7 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'offline',
-          nick: 'agent:trigger:qnabot',
+          nick: `agent:trigger:${this.props.botName}`,
           display_name: this.props.botName,
           member_type: 'agent',
           timestamp: +new Date(),
@@ -501,7 +504,7 @@ class App extends Component {
             type: 'agent_update',
             detail: {
               display_name: this.props.botName,
-              nick: 'agent:trigger:qnabot',
+              nick: `agent:trigger:${this.props.botName}`,
               member_type: 'agent',
               bot: true
             }
