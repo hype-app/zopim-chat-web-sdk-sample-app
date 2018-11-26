@@ -108,12 +108,12 @@ class App extends Component {
             type: 'chat',
             detail: {
               type: 'chat.msg',
-              nick: `agent:trigger:${this.props.botName}`,
-              display_name: this.props.botName,
+              nick: `agent:trigger:${nextProps.botName}`,
+              display_name: nextProps.botName,
               member_type: 'agent',
               timestamp: +new Date(),
               msg: `Ciao sono ${
-                this.props.botName
+                nextProps.botName
               } e puoi chiedermi quello che vuoi!`
             }
           })
