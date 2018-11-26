@@ -14,7 +14,7 @@
 
     *, *:before, *:after {
         box-sizing: border-box;
-        font-family: Muli;
+        font-family: $theme-font;
         overflow: hidden;
     }
 

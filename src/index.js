@@ -17,6 +17,7 @@ class ChatWidget extends Component {
     chatAccountKey,
     botAccountKey,
     botEndpoint,
+    botName = 'Hype Bot',
     emailAddress = 'hello@hype.it',
     servicesCheckUrl = 'https://www.pp-hype.it/api/rest/FREE/services',
     keywords = ['operatore']
@@ -36,6 +37,7 @@ class ChatWidget extends Component {
         chatAccountKey={chatAccountKey}
         botAccountKey={botAccountKey}
         botEndpoint={botEndpoint}
+        botName={botName}
         emailAddress={emailAddress}
         servicesCheckUrl={servicesCheckUrl}
         keywords={keywords}
@@ -61,6 +63,7 @@ class ChatWidget extends Component {
           chatAccountKey={this.props.chatAccountKey}
           botAccountKey={this.props.botAccountKey}
           botEndpoint={this.props.botEndpoint}
+          botName={this.props.botName}
           emailAddress={this.props.emailAddress}
           servicesCheckUrl={this.props.servicesCheckUrl}
           keywords={this.props.keywords}
@@ -76,6 +79,7 @@ ChatWidget.propTypes = {
   chatAccountKey: PropTypes.string,
   botAccountKey: PropTypes.string,
   botEndpoint: PropTypes.string,
+  botName: PropTypes.string,
   emailAddress: PropTypes.string,
   servicesCheckUrl: PropTypes.string,
   keywords: PropTypes.array
@@ -89,17 +93,20 @@ if (process.env.SCOPE === 'demo') {
       ACCOUNT_KEY: chatAccountKey,
       BOT_ACCOUNT_KEY: botAccountKey,
       BOT_ENDPOINT: botEndpoint,
+      BOT_NAME: botName,
       EMAIL_ADDRESS: emailAddress,
       SERVICES_CHECK_URL: servicesCheckUrl,
+      SKIN: theme,
       KEYWORDS: keywords
     } = config
 
     ChatWidget.init({
       selector: 'widget',
-      theme: 'hype',
+      theme,
       chatAccountKey,
       botAccountKey,
       botEndpoint,
+      botName,
       emailAddress,
       servicesCheckUrl,
       keywords

@@ -1,6 +1,6 @@
-@import 'settings/_colors';
-
-$theme-color: $hype-theme-color;
+* {
+    font-family: $theme-font;
+}
 
 .chat-button {
     background-color: $theme-color;

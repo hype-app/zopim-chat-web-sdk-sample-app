@@ -53,15 +53,13 @@ class MessageList extends Component {
         return (
           <div key={msg.type + msg.timestamp}>
             <SystemMessage message={msg} />
-            {isAgent(msg.nick) &&
-              !anyHumanAgent(agents) &&
-              !msg.hidden && (
-                <ChatRating
-                  agent={msg}
-                  lastRating={this.props.lastRating}
-                  lastComment={this.props.lastComment}
-                />
-              )}
+            {isAgent(msg.nick) && !anyHumanAgent(agents) && !msg.hidden && (
+              <ChatRating
+                agent={msg}
+                lastRating={this.props.lastRating}
+                lastComment={this.props.lastComment}
+              />
+            )}
           </div>
         )
       case 'chat.request.rating':

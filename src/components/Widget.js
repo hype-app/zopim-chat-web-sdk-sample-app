@@ -108,11 +108,13 @@ class App extends Component {
             type: 'chat',
             detail: {
               type: 'chat.msg',
-              nick: 'agent:trigger:Hype Bot',
-              display_name: 'Hype Bot',
+              nick: `agent:trigger:${this.props.botName}`,
+              display_name: this.props.botName,
               member_type: 'agent',
               timestamp: +new Date(),
-              msg: 'Ciao sono Hype Bot e puoi chiedermi quello che vuoi!'
+              msg: `Ciao sono ${
+                this.props.botName
+              } e puoi chiedermi quello che vuoi!`
             }
           })
         }
@@ -161,7 +163,10 @@ class App extends Component {
             case 'chat.file':
             case 'chat.request.rating':
             case 'chat.msg':
-              if (isAgent(lastMessage.nick) && !isChatBot(lastMessage.nick)) {
+              if (
+                isAgent(lastMessage.nick) &&
+                !isChatBot(lastMessage.nick, this.props.botName)
+              ) {
                 this.setVisible(true)
               }
           }
@@ -226,7 +231,7 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'typing',
-          nick: 'agent:trigger:Hype Bot',
+          nick: `agent:trigger:${this.props.botName}`,
           typing: true
         }
       })
@@ -239,8 +244,8 @@ class App extends Component {
               type: 'chat',
               detail: {
                 type: 'chat.msg',
-                nick: 'agent:trigger:Hype Bot',
-                display_name: 'Hype Bot',
+                nick: `agent:trigger:${this.props.botName}`,
+                display_name: this.props.botName,
                 member_type: 'agent',
                 timestamp: +new Date(),
                 msg:
@@ -252,8 +257,8 @@ class App extends Component {
               type: 'chat',
               detail: {
                 type: 'chat.msg',
-                nick: 'agent:trigger:Hype Bot',
-                display_name: 'Hype Bot',
+                nick: `agent:trigger:${this.props.botName}`,
+                display_name: this.props.botName,
                 member_type: 'agent',
                 timestamp: +new Date(),
                 msg: json.answers[0].answer
@@ -267,7 +272,7 @@ class App extends Component {
             type: 'chat',
             detail: {
               type: 'typing',
-              nick: 'agent:trigger:Hype Bot',
+              nick: `agent:trigger:${this.props.botName}`,
               typing: false
             }
           })
@@ -283,7 +288,7 @@ class App extends Component {
               type: 'chat',
               detail: {
                 type: 'typing',
-                nick: 'agent:trigger:Hype Bot',
+                nick: `agent:trigger:${this.props.botName}`,
                 typing: false
               }
             })
@@ -369,8 +374,8 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'prechat',
-          nick: 'agent:trigger:Hype Bot',
-          display_name: 'Hype Bot',
+          nick: `agent:trigger:${this.props.botName}`,
+          display_name: this.props.botName,
           member_type: 'agent',
           timestamp: +new Date(),
           msg: `${
@@ -383,8 +388,8 @@ class App extends Component {
         type: 'chat',
         detail: {
           type: 'offline',
-          nick: 'agent:trigger:Hype Bot',
-          display_name: 'Hype Bot',
+          nick: `agent:trigger:${this.props.botName}`,
+          display_name: this.props.botName,
           member_type: 'agent',
           timestamp: +new Date(),
           msg: `${
@@ -498,8 +503,8 @@ class App extends Component {
           this.props.dispatch({
             type: 'agent_update',
             detail: {
-              display_name: 'Hype Bot',
-              nick: 'agent:trigger:Hype Bot',
+              display_name: this.props.botName,
+              nick: `agent:trigger:${this.props.botName}`,
               member_type: 'agent',
               bot: true
             }
@@ -766,6 +771,7 @@ App.propTypes = {
   chatAccountKey: PropTypes.string,
   botAccountKey: PropTypes.string,
   botEndpoint: PropTypes.string,
+  botName: PropTypes.string,
   emailAddress: PropTypes.string,
   servicesCheckUrl: PropTypes.string,
   keywords: PropTypes.array

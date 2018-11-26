@@ -1,11 +1,18 @@
 @import 'settings/_colors';
+@import 'settings/_fonts';
 @import 'tools/_keyframes';
+$theme-font: $hype-theme-font;
+$theme-color: $hype-theme-color;
 @import '_widget';
 
 .hype {
+  $theme-font: $hype-theme-font;
+  $theme-color: $hype-theme-color;
   @import 'themes/_base';
 }
 
 .tim {
+  $theme-font: $tim-theme-font;
+  $theme-color: $tim-theme-color;
   @import 'themes/_base';
 }
