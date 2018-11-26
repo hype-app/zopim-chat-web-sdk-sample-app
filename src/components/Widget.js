@@ -165,7 +165,7 @@ class App extends Component {
             case 'chat.msg':
               if (
                 isAgent(lastMessage.nick) &&
-                !isChatBot(lastMessage.nick, this.props.botName)
+                !isChatBot(lastMessage.nick, nextProps.botName)
               ) {
                 this.setVisible(true)
               }
