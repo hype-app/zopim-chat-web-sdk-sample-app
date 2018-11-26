@@ -15,8 +15,8 @@ export function isTrigger(nick) {
   return nick.startsWith('agent:trigger')
 }
 
-export function isChatBot(nick, botName) {
-  return nick.startsWith(`agent:trigger:${botName}`)
+export function isChatBot(nick) {
+  return nick.startsWith('agent:trigger:qnabot')
 }
 
 export function anyHumanAgent(agents) {
