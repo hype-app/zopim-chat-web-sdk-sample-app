@@ -68,3 +68,4 @@ GitHub.sublime-settings
 
 # dotenv
 .env
+.env.*
