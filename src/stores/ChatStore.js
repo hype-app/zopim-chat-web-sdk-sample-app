@@ -259,7 +259,8 @@ function storeHandler(state = DEFAULT_STATE, action) {
 // let ChatStore = createStore(update, applyMiddleware(chatMiddleware));
 const ChatStore = createStore(
   storeHandler,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__({ name: '@hype/chat-widget' })
 )
 
 export default ChatStore
