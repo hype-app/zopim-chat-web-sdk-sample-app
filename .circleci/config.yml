@@ -1,0 +1,61 @@
+defaults: &defaults
+  working_directory: ~/repo
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    docker:
+      - image: circleci/node:10.15.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-fallback
+      - run:
+          name: install
+          command: yarn install
+      - save_cache:
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: lint
+          command: yarn lint
+      - run:
+          name: test
+          command: yarn test
+      - run:
+          name: build
+          command: yarn clean && yarn dist
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
+  deploy:
+    <<: *defaults
+    docker:
+      - image: circleci/node:10.15.0
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+      - run:
+          name: Purge cdn cache
+          command: yarn purge-cdn
+workflows:
+  version: 2
+  jsdelivr-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

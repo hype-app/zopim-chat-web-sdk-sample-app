@@ -20,8 +20,7 @@
     "postinstall": "node tools download-zendesk-sdk",
     "heroku-postbuild": "yarn dist",
     "precommit": "lint-staged",
-    "prepublishOnly": "yarn clean && yarn dist",
-    "postpublish": "node tools purge-cdn"
+    "purge-cdn": "node tools purge-cdn"
   },
   "repository": "",
   "keywords": [],
