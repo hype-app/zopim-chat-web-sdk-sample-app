@@ -23,9 +23,6 @@ jobs:
           name: lint
           command: yarn lint
       - run:
-          name: test
-          command: yarn test
-      - run:
           name: build
           command: yarn clean && yarn dist
       - persist_to_workspace:
