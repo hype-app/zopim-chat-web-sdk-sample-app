@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import ChatMessage from 'components/ChatMessage'
 import SystemMessage from 'components/SystemMessage'
 import Avatar from 'components/Avatar'
-import OfflineForm from 'components/OfflineForm'
+import OfflineRedirect from 'components/OfflineRedirect'
 import PrechatForm from 'components/PrechatForm'
 import ChatRating from 'components/ChatRating'
 import PropTypes from 'prop-types'
@@ -76,7 +76,7 @@ class MessageList extends Component {
       case 'offline':
         return (
           !msg.hidden && (
-            <OfflineForm
+            <OfflineRedirect
               title={msg.msg}
               subTitle={msg.subMsg}
               key={msg.type + msg.timestamp}
