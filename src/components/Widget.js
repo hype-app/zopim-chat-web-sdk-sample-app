@@ -86,6 +86,14 @@ class App extends Component {
     })
   }
 
+  componentWillMount() {
+    if (
+      location.href.toLowerCase().includes('tutti-i-contatti-dell-assistenza')
+    ) {
+      this.setVisible(false)
+    }
+  }
+
   componentWillUnmount() {
     this.props.onRef(undefined)
   }

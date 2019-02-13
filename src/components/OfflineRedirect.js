@@ -16,12 +16,7 @@ class OfflineRedirect extends Component {
   openSupportCenter() {
     const url =
       'https://support.hype.it/hc/it/articles/360003472313-Tutti-i-contatti-dell-assistenza'
-
-    if (/(hype(\d+)\.zendesk.com|support.hype.it)/.test(location.hostname)) {
-      location.href = url
-    } else {
-      window.open(url)
-    }
+    window.open(url)
   }
 
   render() {
