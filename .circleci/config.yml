@@ -29,6 +29,7 @@ jobs:
           root: ./
           paths:
             - dist
+            - package.json
   deploy:
     <<: *defaults
     docker:
