@@ -8,7 +8,7 @@ import { log, isAgent } from 'utils'
 import zChat from 'vendor/web-sdk'
 import ReactMarkdown from 'react-markdown/with-html'
 import PropTypes from 'prop-types'
-//
+
 class ChatMessage extends Component {
   constructor(props) {
     super(props)
