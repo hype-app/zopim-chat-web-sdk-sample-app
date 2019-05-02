@@ -11,7 +11,7 @@ const writeFilePromiseFactory = promisify(fs.writeFile)
 function purgeCdn() {
   const options = {
     method: 'POST',
-    url: 'http://purge.jsdelivr.net/',
+    url: 'https://purge.jsdelivr.net/',
     headers: {
       'content-type': 'application/json',
       'cache-control': 'no-cache'

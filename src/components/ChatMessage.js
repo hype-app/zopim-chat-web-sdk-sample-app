@@ -63,7 +63,9 @@ class ChatMessage extends Component {
   }
 
   parseMessage(msg) {
-    return msg.replace(/<a[^>]*(?:href="([^"]*)")>([^<]*)<\/a>/gi, '[$2]($1)')
+    return msg
+      .replace(/<a[^>]*(?:href="([^"]*)")>([^<]*)<\/a>/gi, '[$2]($1)')
+      .replace(/\[\*\*([^\*]+)\*\*\]/gi, '[$1]')
   }
 
   renderMessagePart(msg) {
@@ -80,11 +82,13 @@ class ChatMessage extends Component {
                 source={this.parseMessage(this.props.message.msg)}
                 renderers={{
                   link: props => (
-                    <b>
-                      <a href={props.href} target="_blank">
-                        {props.children}
-                      </a>
-                    </b>
+                    <a
+                      href={props.href}
+                      style={{ display: 'inline' }}
+                      target="_blank"
+                    >
+                      <strong>{props.children}</strong>
+                    </a>
                   )
                 }}
                 escapeHtml={false}
