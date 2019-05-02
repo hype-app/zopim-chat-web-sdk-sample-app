@@ -63,33 +63,7 @@ class ChatMessage extends Component {
   }
 
   parseMessage(msg) {
-    return msg.replace(
-      /(?:<a[^"']+href=["']|\[[^\]]+\]\()?((https?:\/\/|s?ftp:\/\/)?([a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(?::[0-9]{1,5})?(?:\/[^\s]*)?))(?:["'>][^<]+<\/a>|\))?/gi,
-      this.replaceLinksInMessage
-    )
-  }
-
-  replaceLinksInMessage(match, fullUrl, protocol, url) {
-    const plainTextRegex = /^\w/gi
-    const htmlAnchorRegex = /<[^>]+href=["']([^"']+)["'][^>]+>([^>]+)<\/[^>]+>/gi
-    const markdownLinkRegex = /\[([^\]]+)\]\(([^)]+)\)/gi
-
-    let linkText = ''
-
-    if (plainTextRegex.test(match)) {
-      linkText = fullUrl
-    }
-
-    if (!linkText || linkText === match) {
-      linkText = match.replace(htmlAnchorRegex, '$2')
-    }
-
-    if (!linkText || linkText === match) {
-      linkText = match.replace(markdownLinkRegex, '$1')
-    }
-
-    return `<b><a href="${protocol ||
-      '//'}${url}" target="_blank">${linkText}</a></b>`
+    return msg.replace(/<a[^>]*(?:href="([^"]*)")>([^<]*)<\/a>/gi, '[$2]($1)')
   }
 
   renderMessagePart(msg) {
@@ -104,6 +78,15 @@ class ChatMessage extends Component {
             <span>
               <ReactMarkdown
                 source={this.parseMessage(this.props.message.msg)}
+                renderers={{
+                  link: props => (
+                    <b>
+                      <a href={props.href} target="_blank">
+                        {props.children}
+                      </a>
+                    </b>
+                  )
+                }}
                 escapeHtml={false}
               />
             </span>
