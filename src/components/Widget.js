@@ -84,6 +84,18 @@ class App extends Component {
       visible: get('visible') || this.state.visible,
       theme: get('theme') || this.state.theme
     })
+
+    window.addEventListener(
+      'storage',
+      () => {
+        if (get('visible') !== this.state.visible) {
+          this.setState({
+            visible: get('visible')
+          })
+        }
+      },
+      false
+    )
   }
 
   componentWillMount() {
