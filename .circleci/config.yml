@@ -50,7 +50,7 @@ jobs:
           command: yarn purge-cdn
 workflows:
   version: 2
-  jsdelivr-deploy:
+  build-test-deploy:
     jobs:
       - build
       - deploy:
