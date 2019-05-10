@@ -33,7 +33,7 @@ class StatusContainer extends Component {
       <div className="status-container">
         {this.getStatusText(this.props.accountStatus)}
         <div className="minimize-button" onClick={this.props.minimizeOnClick}>
-          <div className="minimize-button-bar" />
+          X{/*<div className="minimize-button-bar" />*/}
         </div>
       </div>
     )
