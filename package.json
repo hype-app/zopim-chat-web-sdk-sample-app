@@ -1,6 +1,6 @@
 {
   "name": "hype-chat-widget",
-  "version": "0.3.31",
+  "version": "0.3.32",
   "license": "MIT",
   "description": "Zopim + QnA Chat Web Widget (React)",
   "main": "dist/index.js",
@@ -21,7 +21,6 @@
     "heroku-postbuild": "yarn dist",
     "precommit": "lint-staged",
     "purge-cdn": "node tools purge-cdn",
-    "prepublishOnly": "yarn clean && yarn dist",
     "postpublish": "yarn purge-cdn"
   },
   "repository": "",
