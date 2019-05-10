@@ -50,9 +50,11 @@ jobs:
           command: yarn purge-cdn
 workflows:
   version: 2
-  build-test-deploy:
+  build:
     jobs:
       - build
+  deploy:
+    jobs:
       - deploy:
           requires:
             - build
