@@ -30,6 +30,7 @@ jobs:
           paths:
             - dist
             - node_modules
+            - tools.js
             - package.json
             - yarn.lock
   deploy:
