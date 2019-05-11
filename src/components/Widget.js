@@ -433,11 +433,18 @@ class App extends Component {
               const startT = new Date()
               const endT = new Date()
 
-              const currDaySettings =
+              let currDaySettings =
                 zChatOperatorSettings.department_schedule[k][startT.getDay()]
 
-              startT.setHours(0, currDaySettings[0].start, 0, 0)
-              endT.setHours(0, currDaySettings[0].end, 0, 0)
+              if (currDaySettings.length === 0) {
+                currDaySettings =
+                  zChatOperatorSettings.department_schedule[k][1]
+              }
+
+              if (currDaySettings.length !== 0) {
+                startT.setHours(0, currDaySettings[0].start, 0, 0)
+                endT.setHours(0, currDaySettings[0].end, 0, 0)
+              }
 
               return {
                 ...template,
@@ -449,11 +456,17 @@ class App extends Component {
           )
         case 'account':
           return ((startT, endT) => {
-            const currDaySettings =
+            let currDaySettings =
               zChatOperatorSettings.account_schedule[startT.getDay()]
 
-            startT.setHours(0, currDaySettings[0].start, 0, 0)
-            endT.setHours(0, currDaySettings[0].end, 0, 0)
+            if (currDaySettings.length === 0) {
+              currDaySettings = zChatOperatorSettings.account_schedule[1]
+            }
+
+            if (currDaySettings.length !== 0) {
+              startT.setHours(0, currDaySettings[0].start, 0, 0)
+              endT.setHours(0, currDaySettings[0].end, 0, 0)
+            }
 
             return [
               {
