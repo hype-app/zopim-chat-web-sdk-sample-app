@@ -24,7 +24,7 @@ jobs:
           command: yarn lint
       - run:
           name: build
-          command: yarn clean && yarn dist
+          command: yarn clean && NODE_ENV=production yarn dist
       - persist_to_workspace:
           root: ./
           paths:
