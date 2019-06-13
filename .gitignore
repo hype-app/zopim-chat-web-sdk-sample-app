@@ -67,5 +67,5 @@ bh_unicode_properties.cache
 GitHub.sublime-settings
 
 # dotenv
-.env
+*.env
 .envs

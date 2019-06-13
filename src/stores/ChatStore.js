@@ -1,5 +1,5 @@
-import { log, isAgent, isTrigger, set } from 'utils'
-import { createStore } from 'redux'
+import { /* log, */ isAgent, isTrigger, set } from 'utils'
+import { applyMiddleware, createStore, compose } from 'redux'
 import SortedMap from 'collections/sorted-map'
 
 const hidePreviousRatingRequest = (chats, action) =>
@@ -34,7 +34,7 @@ const DEFAULT_STATE = {
 
 // IMPT: Need to return on every case
 function update(state = DEFAULT_STATE, action) {
-  log('action', action)
+  // log('action', action)
 
   if (action.detail && action.detail.timestamp)
     state.last_timestamp = action.detail.timestamp
@@ -196,7 +196,7 @@ function update(state = DEFAULT_STATE, action) {
           return state
       }
     default:
-      log('unhandled action', action)
+      // log('unhandled action', action)
       return state
   }
 }
@@ -205,7 +205,7 @@ function storeHandler(state = DEFAULT_STATE, action) {
   let result,
     new_action = {}
   if (action.type === 'synthetic') {
-    log('synthetic action', action)
+    // log('synthetic action', action)
 
     /**
      * Use last message timestamp for user-sent messages
@@ -257,10 +257,29 @@ function storeHandler(state = DEFAULT_STATE, action) {
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
 // let ChatStore = createStore(update, applyMiddleware(chatMiddleware));
+
+const middlewares = []
+
+let composeEnhancers = compose
+
+if (process.env.NODE_ENV !== 'production') {
+  const { createLogger } = require('redux-logger')
+  const logger = createLogger({
+    collapsed: true
+  })
+  middlewares.push(logger)
+
+  composeEnhancers =
+    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+        name: '@hype/chat-widget'
+      })) ||
+    compose
+}
+
 const ChatStore = createStore(
   storeHandler,
-  window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__({ name: '@hype/chat-widget' })
+  composeEnhancers(applyMiddleware(...middlewares))
 )
 
 export default ChatStore
