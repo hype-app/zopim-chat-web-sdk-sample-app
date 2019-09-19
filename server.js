@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const config = require('./webpack.config')
 const open = require('open')
-const ip_address = '127.0.0.1'
+const ip_address = '0.0.0.0'
 
 new WebpackDevServer(webpack(config), config.devServer).listen(
   config.devServer.port,
