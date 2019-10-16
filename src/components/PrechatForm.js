@@ -101,7 +101,7 @@ class PrechatForm extends Component {
           </div>
         </div>
         <div className="button-container">
-          <div class="privacy-caption">
+          <div className="privacy-caption">
             Ti informiamo che i dati da te forniti sono e saranno utilizzati con
             la sola finalità di portare a termine la tua richiesta.
           </div>
