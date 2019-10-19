@@ -417,8 +417,7 @@ class App extends Component {
               ? 'Non riesco a rispondere alla tua domanda e al momento non ci sono operatori disponibili.'
               : 'Al momento non ci sono operatori disponibili.'
           }`,
-          subMsg: `Puoi chattare con un operatore dal Lunedì al Venerdì, esclusi i festivi,
-                   ${this.getOperatorAvailabilityString()}.`
+          subMsg: this.getOperatorAvailabilityString()
         }
       })
     }
@@ -567,9 +566,42 @@ class App extends Component {
 
   getOperatorAvailabilityString() {
     return this.props.data.chatbot.chatOperatorSettings.reduce((res, next) => {
-      return `${res}${res.length > 0 ? ' o ' : ' '}dalle ${
-        next.startTime
-      } alle ${next.endTime}`
+      const daysMap = {
+        '0': 'Domenica',
+        '1': 'Lunedì',
+        '2': 'Martedì',
+        '3': 'Mercoledì',
+        '4': 'Giovedì',
+        '5': 'Venerdì',
+        '6': 'Sabato'
+      }
+      const zChatOperatorSettings = zChat.getOperatingHours()
+      const schedules =
+        zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
+
+      const createReadableDayFromFirstAvailableSchedule = (res, next) => {
+        if (!res && !!schedules[next] && schedules[next].length > 0) {
+          res = next
+        }
+        return res
+      }
+      const startDay =
+        daysMap[
+          Object.keys(schedules).reduce(
+            createReadableDayFromFirstAvailableSchedule,
+            null
+          )
+        ]
+      const endDay =
+        daysMap[
+          Object.keys(schedules)
+            .reverse()
+            .reduce(createReadableDayFromFirstAvailableSchedule, null)
+        ]
+      return `Puoi chattare con un operatore dal ${startDay} al ${endDay}, esclusi i festivi,
+      ${res}${res.length > 0 ? ' o ' : ' '}dalle ${next.startTime} alle ${
+        next.endTime
+      }.`
     }, '')
   }
 
