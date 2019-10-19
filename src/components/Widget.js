@@ -592,7 +592,7 @@ class App extends Component {
           available &&
           time.isAfter(startTime) &&
           time.isBefore(endTime) &&
-          time.day() !== 6 &&
+          // time.day() !== 6 &&
           time.day() !== 0
 
         const availableUntil = endTime
