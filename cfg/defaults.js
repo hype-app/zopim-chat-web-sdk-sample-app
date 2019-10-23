@@ -18,6 +18,11 @@ function getDefaultModules() {
         use: 'eslint-loader'
       },
       {
+        test: /\.(js|jsx)$/,
+        include: srcPath,
+        use: 'babel-loader'
+      },
+      {
         test: /\.css$/,
         use: [
           { loader: 'style-loader' },

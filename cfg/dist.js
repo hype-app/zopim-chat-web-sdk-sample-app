@@ -40,6 +40,9 @@ const config = Object.assign({}, baseConfig, {
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
+        // cache: true,
+        // parallel: true,
+        sourceMap: true,
         uglifyOptions: {
           mangle: true,
           warnings: false,
@@ -47,7 +50,6 @@ const config = Object.assign({}, baseConfig, {
           conditionals: true,
           unused: true,
           comparisons: true,
-          sourceMap: true,
           sequences: true,
           dead_code: true, // eslint-disable-line camelcase
           evaluate: true,

@@ -98,7 +98,7 @@ class App extends Component {
     )
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (
       location.href.toLowerCase().includes('tutti-i-contatti-dell-assistenza')
     ) {
