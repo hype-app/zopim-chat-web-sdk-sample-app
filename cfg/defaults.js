@@ -5,11 +5,7 @@ const srcPath = path.join(__dirname, '/../src')
 const vendorPath = path.join(__dirname, '/../vendor')
 
 const postCssOptions = {
-  plugins: () => [
-    autoprefixer({
-      browsers: ['last 5 versions', 'ie 6-11']
-    })
-  ]
+  plugins: () => [autoprefixer()]
 }
 
 function getDefaultModules() {
@@ -44,8 +40,7 @@ function getDefaultModules() {
           {
             loader: 'sass-loader',
             options: {
-              outputStyle: 'expanded',
-              indentedSyntax: true
+              sassOptions: { outputStyle: 'expanded', indentedSyntax: true }
             }
           }
         ]
@@ -62,7 +57,7 @@ function getDefaultModules() {
           {
             loader: 'sass-loader',
             options: {
-              outputStyle: 'expanded'
+              sassOptions: { outputStyle: 'expanded' }
             }
           }
         ]

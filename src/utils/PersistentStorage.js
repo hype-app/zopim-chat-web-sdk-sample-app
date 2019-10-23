@@ -12,8 +12,10 @@ export function set(key, value) {
 
 function init() {
   if (!store.enabled) {
-    get = function() {}
-    set = function() {}
+    // eslint-disable-next-line no-func-assign
+    get = () => {}
+    // eslint-disable-next-line no-func-assign
+    set = () => {}
   }
 }
 

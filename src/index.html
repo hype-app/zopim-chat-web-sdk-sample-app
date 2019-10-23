@@ -1,23 +1,23 @@
 <!doctype html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title>Hype Chat Widget Demo</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
-	<script type="text/javascript" src="/assets/widget.js"></script>
-	<script type="text/javascript">
-		window.theme = 'docked';
+  <meta charset="utf-8">
+  <title>Hype Chat Widget Demo</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script>__REACT_DEVTOOLS_GLOBAL_HOOK__ = parent.__REACT_DEVTOOLS_GLOBAL_HOOK__</script>
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script> -->
+  <script type="text/javascript" src="/assets/widget.js"></script>
+  <script type="text/javascript">
+    window.theme = 'docked';
 
-		function themeChange(opt) {
-			window.onThemeChange(opt.value);
-		}
-	</script>
-	<style type="text/css">
-
+    function themeChange(opt) {
+      window.onThemeChange(opt.value);
+    }
+  </script>
+  <style type="text/css">
     /* latin-ext */
     @font-face {
       font-family: 'Muli';
@@ -26,6 +26,7 @@
       src: local('Muli Light Italic'), local('Muli-LightItalic'), url(https://fonts.gstatic.com/s/muli/v12/7Au9p_0qiz-afTf-hCDGw2QIAFg.woff2) format('woff2'), url('/assets/fonts/Muli-LightItalic.ttf') format('truetype');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
+
     /* latin */
     @font-face {
       font-family: 'Muli';
@@ -34,6 +35,7 @@
       src: local('Muli Light Italic'), local('Muli-LightItalic'), url(https://fonts.gstatic.com/s/muli/v12/7Au9p_0qiz-afTf-hCDGzWQI.woff2) format('woff2'), url('/assets/fonts/Muli-LightItalic.ttf') format('truetype');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
+
     /* latin-ext */
     @font-face {
       font-family: 'Muli';
@@ -42,6 +44,7 @@
       src: local('Muli Italic'), local('Muli-Italic'), url(https://fonts.gstatic.com/s/muli/v12/7Au-p_0qiz-afTf2IQLT8kU.woff2) format('woff2'), url('/assets/fonts/Muli-Italic.ttf') format('truetype');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
+
     /* latin */
     @font-face {
       font-family: 'Muli';
@@ -50,6 +53,7 @@
       src: local('Muli Italic'), local('Muli-Italic'), url(https://fonts.gstatic.com/s/muli/v12/7Au-p_0qiz-afTf2LwLT.woff2) format('woff2'), url('/assets/fonts/Muli-Italic.ttf') format('truetype');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
+
     /* latin-ext */
     @font-face {
       font-family: 'Muli';
@@ -58,6 +62,7 @@
       src: local('Muli Bold Italic'), local('Muli-BoldItalic'), url(https://fonts.gstatic.com/s/muli/v12/7Au9p_0qiz-afTf-lCfGw2QIAFg.woff2) format('woff2'), url('/assets/fonts/Muli-BoldItalic.ttf') format('truetype');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
+
     /* latin */
     @font-face {
       font-family: 'Muli';
@@ -66,6 +71,7 @@
       src: local('Muli Bold Italic'), local('Muli-BoldItalic'), url(https://fonts.gstatic.com/s/muli/v12/7Au9p_0qiz-afTf-lCfGzWQI.woff2) format('woff2'), url('/assets/fonts/Muli-BoldItalic.ttf') format('truetype');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
+
     /* latin-ext */
     @font-face {
       font-family: 'Muli';
@@ -74,6 +80,7 @@
       src: local('Muli ExtraBold Italic'), local('Muli-ExtraBoldItalic'), url(https://fonts.gstatic.com/s/muli/v12/7Au9p_0qiz-afTf-iCTGw2QIAFg.woff2) format('woff2'), url('/assets/fonts/Muli-ExtraBoldItalic.ttf') format('truetype');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
+
     /* latin */
     @font-face {
       font-family: 'Muli';
@@ -82,6 +89,7 @@
       src: local('Muli ExtraBold Italic'), local('Muli-ExtraBoldItalic'), url(https://fonts.gstatic.com/s/muli/v12/7Au9p_0qiz-afTf-iCTGzWQI.woff2) format('woff2'), url('/assets/fonts/Muli-ExtraBoldItalic.ttf') format('truetype');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
+
     /* latin-ext */
     @font-face {
       font-family: 'Muli';
@@ -90,6 +98,7 @@
       src: local('Muli Light'), local('Muli-Light'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adZnkOCv2z3wM.woff2) format('woff2'), url('/assets/fonts/Muli-Light.ttf') format('truetype');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
+
     /* latin */
     @font-face {
       font-family: 'Muli';
@@ -98,6 +107,7 @@
       src: local('Muli Light'), local('Muli-Light'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adZnkOCX2zw.woff2) format('woff2'), url('/assets/fonts/Muli-Light.ttf') format('truetype');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
+
     /* latin-ext */
     @font-face {
       font-family: 'Muli';
@@ -106,6 +116,7 @@
       src: local('Muli Regular'), local('Muli-Regular'), url(https://fonts.gstatic.com/s/muli/v12/7Auwp_0qiz-afTzGLRrX.woff2) format('woff2'), url('/assets/fonts/Muli-Regular.ttf') format('truetype');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
+
     /* latin */
     @font-face {
       font-family: 'Muli';
@@ -114,6 +125,7 @@
       src: local('Muli Regular'), local('Muli-Regular'), url(https://fonts.gstatic.com/s/muli/v12/7Auwp_0qiz-afTLGLQ.woff2) format('woff2'), url('/assets/fonts/Muli-Regular.ttf') format('truetype');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
+
     /* latin-ext */
     @font-face {
       font-family: 'Muli';
@@ -122,6 +134,7 @@
       src: local('Muli Bold'), local('Muli-Bold'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adYnjOCv2z3wM.woff2) format('woff2'), url('/assets/fonts/Muli-Bold.ttf') format('truetype');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
+
     /* latin */
     @font-face {
       font-family: 'Muli';
@@ -130,6 +143,7 @@
       src: local('Muli Bold'), local('Muli-Bold'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adYnjOCX2zw.woff2) format('woff2'), url('/assets/fonts/Muli-Bold.ttf') format('truetype');
       unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
     }
+
     /* latin-ext */
     @font-face {
       font-family: 'Muli';
@@ -138,6 +152,7 @@
       src: local('Muli ExtraBold'), local('Muli-ExtraBold'), url(https://fonts.gstatic.com/s/muli/v12/7Au_p_0qiz-adZXgOCv2z3wM.woff2) format('woff2'), url('/assets/fonts/Muli-ExtraBold.ttf') format('truetype');
       unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
     }
+
     /* latin */
     @font-face {
       font-family: 'Muli';
@@ -153,7 +168,14 @@
       font-family: 'TIM Sans';
       font-style: normal;
       font-weight: 300;
-      src: local('timsans-light'), local('timsans-light'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-light.woff) format('woff'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-light.ttf) format('truetype'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-light.eot?#iefix) format('embedded-opentype'), url('${assetsPath}/fonts/timsans-light.woff') format('woff'), url('${assetsPath}/fonts/timsans-light.ttf') format('truetype'), url('${assetsPath}/fonts/timsans-light.eot?#iefix') format('embedded-opentype');
+      src: local('timsans-light'),
+      local('timsans-light'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-light.woff) format('woff'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-light.ttf) format('truetype'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-light.eot?#iefix) format('embedded-opentype'),
+      url('${assetsPath}/fonts/timsans-light.woff') format('woff'),
+      url('${assetsPath}/fonts/timsans-light.ttf') format('truetype'),
+      url('${assetsPath}/fonts/timsans-light.eot?#iefix') format('embedded-opentype');
     }
 
     /* latin */
@@ -161,7 +183,14 @@
       font-family: 'TIM Sans';
       font-style: normal;
       font-weight: 400;
-      src: local('timsans-regular'), local('timsans-regular'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-regular.woff) format('woff'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-regular.ttf) format('truetype'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-regular.eot?#iefix) format('embedded-opentype'), url('${assetsPath}/fonts/timsans-regular.woff') format('woff'), url('${assetsPath}/fonts/timsans-regular.ttf') format('truetype'), url('${assetsPath}/fonts/timsans-regular.eot?#iefix') format('embedded-opentype');
+      src: local('timsans-regular'),
+      local('timsans-regular'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-regular.woff) format('woff'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-regular.ttf) format('truetype'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-regular.eot?#iefix) format('embedded-opentype'),
+      url('${assetsPath}/fonts/timsans-regular.woff') format('woff'),
+      url('${assetsPath}/fonts/timsans-regular.ttf') format('truetype'),
+      url('${assetsPath}/fonts/timsans-regular.eot?#iefix') format('embedded-opentype');
     }
 
     /* latin */
@@ -169,7 +198,14 @@
       font-family: 'TIM Sans';
       font-style: normal;
       font-weight: 700;
-      src: local('timsans-bold'), local('timsans-bold'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-bold.woff) format('woff'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-bold.ttf) format('truetype'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-bold.eot?#iefix) format('embedded-opentype'), url('${assetsPath}/fonts/timsans-bold.woff') format('woff'), url('${assetsPath}/fonts/timsans-bold.ttf') format('truetype'), url('${assetsPath}/fonts/timsans-bold.eot?#iefix') format('embedded-opentype');
+      src: local('timsans-bold'),
+      local('timsans-bold'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-bold.woff) format('woff'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-bold.ttf) format('truetype'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-bold.eot?#iefix) format('embedded-opentype'),
+      url('${assetsPath}/fonts/timsans-bold.woff') format('woff'),
+      url('${assetsPath}/fonts/timsans-bold.ttf') format('truetype'),
+      url('${assetsPath}/fonts/timsans-bold.eot?#iefix') format('embedded-opentype');
     }
 
     /* latin */
@@ -177,49 +213,58 @@
       font-family: 'TIM Sans';
       font-style: normal;
       font-weight: 800;
-      src: local('timsans-heavy'), local('timsans-heavy'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-heavy.woff) format('woff'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-heavy.ttf) format('truetype'), url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-heavy.eot?#iefix) format('embedded-opentype'), url('${assetsPath}/fonts/timsans-heavy.woff') format('woff'), url('${assetsPath}/fonts/timsans-heavy.ttf') format('truetype'), url('${assetsPath}/fonts/timsans-heavy.eot?#iefix') format('embedded-opentype');
+      src: local('timsans-heavy'),
+      local('timsans-heavy'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-heavy.woff) format('woff'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-heavy.ttf) format('truetype'),
+      url(https://cdn.rawgit.com/hype-app/fonts/ced548a8/timsans-heavy.eot?#iefix) format('embedded-opentype'),
+      url('${assetsPath}/fonts/timsans-heavy.woff') format('woff'),
+      url('${assetsPath}/fonts/timsans-heavy.ttf') format('truetype'),
+      url('${assetsPath}/fonts/timsans-heavy.eot?#iefix') format('embedded-opentype');
     }
 
 
-		body {
-				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
-		}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+    }
 
-		pre, code {
-				font-family: monospace;
-		}
+    pre,
+    code {
+      font-family: monospace;
+    }
 
-		a {
-				text-decoration: none;
-				color: inherit;
-		}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-		.warning-container {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: rgba(118, 118, 118, 0.4);
-		}
+    .warning-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(118, 118, 118, 0.4);
+    }
 
-		.warning {
-				position: fixed;
-				width: 80%;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				padding: 20px;
-				text-align: center;
-				box-shadow: 0 5px 40px rgba(0,0,0,.16);
-				background: white;
-		}
-	</style>
+    .warning {
+      position: fixed;
+      width: 80%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 5px 40px rgba(0, 0, 0, .16);
+      background: white;
+    }
+  </style>
 </head>
-<body style="margin: 20px;">
-	<h1>Un pochino antani in prefettura</h1>
 
-	<!-- <div>
+<body style="margin: 20px;">
+  <h1>Un pochino antani in prefettura</h1>
+
+  <!-- <div>
 		<label>Widget style</label>
 		<select name="theme" onchange="themeChange(this)">
 			<option value="docked">Docked</option>
@@ -227,22 +272,62 @@
 		</select>
 	</div> -->
 
-	<div id="lipsum">
+  <div id="lipsum">
     <h2>Le due cose come vice-sindaco</h2>
     <h3>Antani in prefettura</h3>
-    <p>Si, ma la sbiriguda della sbrindellona come se fosse antani come faceva? Prego? Ho provato con la supercazzola con scappelamento paraplegico a sinistra, ma non funzionava. Come figliolo? Confesso come fosse antani con scappellamento a destra costantinato ammaliti. Quante volte figliolo? Fifty fifty, prematinea come fosse mea culpa. Alla supercazzola. Ho provato con la supercazzola con scappellamento paraplegico a sinistra, ma non funzionava, faceva tu-tu. In che senso? Nel senso anafestico. Eh, sì; come farà di capo d'altitudine, no? Che non si ripeta più, vada pure! Senz'altro!!! Tarapia tapioco! Brematurata la supercazzola o scherziamo? Prego? No, mi permetta. No, io, scusi noi siamo in quattro. </p>
+    <p>Si, ma la sbiriguda della sbrindellona come se fosse antani come faceva? Prego? Ho provato con la supercazzola
+      con scappelamento paraplegico a sinistra, ma non funzionava. Come figliolo? Confesso come fosse antani con
+      scappellamento a destra costantinato ammaliti. Quante volte figliolo? Fifty fifty, prematinea come fosse mea
+      culpa. Alla supercazzola. Ho provato con la supercazzola con scappellamento paraplegico a sinistra, ma non
+      funzionava, faceva tu-tu. In che senso? Nel senso anafestico. Eh, sì; come farà di capo d'altitudine, no? Che non
+      si ripeta più, vada pure! Senz'altro!!! Tarapia tapioco! Brematurata la supercazzola o scherziamo? Prego? No, mi
+      permetta. No, io, scusi noi siamo in quattro. </p>
 
-    <p>Ma allora io le potrei dire anche con il rispetto per l'autorità, che anche soltanto le due cose come vice-sindaco, capisce? Guardi, le ho ritagliato quell'articolo sul Casentino. Ma lei se la blinda la supercazzola prematurata come se fosse anche un po' di Casentino che perdura anche come cappotto; vede, m'importa. No, no.. non era troppo alto. Forse non ha capito. Io dicevo che se fosse il coso di telefono, o il dito, come se fosse. Andando su o giù, giù o su. Mi scusi, Antani come se fosse di scappellamento tarapio tapioco scappellamento di forestieri? Va be', siete forestieri, ma i cartelli sono internazionali. Mi può mostrare la sua patente, per favore? </p>
+    <p>Ma allora io le potrei dire anche con il rispetto per l'autorità, che anche soltanto le due cose come
+      vice-sindaco, capisce? Guardi, le ho ritagliato quell'articolo sul Casentino. Ma lei se la blinda la supercazzola
+      prematurata come se fosse anche un po' di Casentino che perdura anche come cappotto; vede, m'importa. No, no.. non
+      era troppo alto. Forse non ha capito. Io dicevo che se fosse il coso di telefono, o il dito, come se fosse.
+      Andando su o giù, giù o su. Mi scusi, Antani come se fosse di scappellamento tarapio tapioco scappellamento di
+      forestieri? Va be', siete forestieri, ma i cartelli sono internazionali. Mi può mostrare la sua patente, per
+      favore? </p>
 
-    <p>Come se fosse antani anche per lei soltanto in due, oppure in quattro anche scribai con cofandina; come antifurto, per esempio. Dimmi figliolo. Sbiliguda veniale con la supercazzola prematurata. Come figliolo? Confesso come fosse antani con scappellamento a destra costantinato ammaliti. Segua col dito. Vede, se va giù non va su. Se va su non va giù. Si faccia aiutare dalla suora. È quello che stavo dicendo, no!? Mi scusi, Antani come se fosse di scappellamento tarapio tapioco scappellamento di forestieri? Va be', siete forestieri, ma i cartelli sono internazionali. Mi può mostrare la sua patente, per favore? </p>
+    <p>Come se fosse antani anche per lei soltanto in due, oppure in quattro anche scribai con cofandina; come
+      antifurto, per esempio. Dimmi figliolo. Sbiliguda veniale con la supercazzola prematurata. Come figliolo? Confesso
+      come fosse antani con scappellamento a destra costantinato ammaliti. Segua col dito. Vede, se va giù non va su. Se
+      va su non va giù. Si faccia aiutare dalla suora. È quello che stavo dicendo, no!? Mi scusi, Antani come se fosse
+      di scappellamento tarapio tapioco scappellamento di forestieri? Va be', siete forestieri, ma i cartelli sono
+      internazionali. Mi può mostrare la sua patente, per favore? </p>
 
-    <p>Ho capito. Tre applicazioni di afasol, di un’ora l’una. Subito! Che c’è? Ehm.. blinda la supercazzola con scappellamento a sinistra e a destra come se fossero dei pentoloni. Ma allora io le potrei dire anche con il rispetto per l'autorità, che anche soltanto le due cose come vice-sindaco, capisce? E lei.. cosa si sente? Professore, non le dico. Antani come trazione per due anche se fosse supercazzola bitumata, ha lo scappellamento a destra. Segua col dito. Vede, se va giù non va su. Se va su non va giù. Si faccia aiutare dalla suora. È quello che stavo dicendo, no!? </p>
+    <p>Ho capito. Tre applicazioni di afasol, di un’ora l’una. Subito! Che c’è? Ehm.. blinda la supercazzola con
+      scappellamento a sinistra e a destra come se fossero dei pentoloni. Ma allora io le potrei dire anche con il
+      rispetto per l'autorità, che anche soltanto le due cose come vice-sindaco, capisce? E lei.. cosa si sente?
+      Professore, non le dico. Antani come trazione per due anche se fosse supercazzola bitumata, ha lo scappellamento a
+      destra. Segua col dito. Vede, se va giù non va su. Se va su non va giù. Si faccia aiutare dalla suora. È quello
+      che stavo dicendo, no!? </p>
 
-    <p>Pattene soppaltate secondo l'articolo 12 abbia pazienza, sennò, posterdati, per due, anche un pochino antani in prefettura...senza contare che la supercazzola prematurata ha perso i contatti col tarapio tapioco. Si, ma la sbiriguda della sbrindellona come se fosse antani come faceva? Prego? Ho provato con la supercazzola con scappelamento paraplegico a sinistra, ma non funzionava. Ah, pardon. Tarapio tapioco come se fosse Antani, la supercazzola prematurata con dominus reveriscum blinda. Come, prego? Tarapio sulla supercazzola con scappellamento destro o sinistra ? Sorella? Eh!? Col tarapia tapioco come se fosse la supercazzola per lei. Voglio il cappellano, il cappellano! Ho visto la Madonna! </p>
+    <p>Pattene soppaltate secondo l'articolo 12 abbia pazienza, sennò, posterdati, per due, anche un pochino antani in
+      prefettura...senza contare che la supercazzola prematurata ha perso i contatti col tarapio tapioco. Si, ma la
+      sbiriguda della sbrindellona come se fosse antani come faceva? Prego? Ho provato con la supercazzola con
+      scappelamento paraplegico a sinistra, ma non funzionava. Ah, pardon. Tarapio tapioco come se fosse Antani, la
+      supercazzola prematurata con dominus reveriscum blinda. Come, prego? Tarapio sulla supercazzola con scappellamento
+      destro o sinistra ? Sorella? Eh!? Col tarapia tapioco come se fosse la supercazzola per lei. Voglio il cappellano,
+      il cappellano! Ho visto la Madonna! </p>
 
-    <p>Si, ma la sbiriguda della sbrindellona come se fosse antani come faceva? Prego? Ho provato con la supercazzola con scappelamento paraplegico a sinistra, ma non funzionava. Ma che antifurto, mi faccia il piacere! Questi signori qui stavano sonando loro. Ah, pardon. Tarapio tapioco come se fosse Antani, la supercazzola prematurata con dominus reveriscum blinda. Come, prego? Tarapio sulla supercazzola con scappellamento destro o sinistra ? Segua col dito. Vede, se va giù non va su. Se va su non va giù. Si faccia aiutare dalla suora. È quello che stavo dicendo, no!? </p>
+    <p>Si, ma la sbiriguda della sbrindellona come se fosse antani come faceva? Prego? Ho provato con la supercazzola
+      con scappelamento paraplegico a sinistra, ma non funzionava. Ma che antifurto, mi faccia il piacere! Questi
+      signori qui stavano sonando loro. Ah, pardon. Tarapio tapioco come se fosse Antani, la supercazzola prematurata
+      con dominus reveriscum blinda. Come, prego? Tarapio sulla supercazzola con scappellamento destro o sinistra ?
+      Segua col dito. Vede, se va giù non va su. Se va su non va giù. Si faccia aiutare dalla suora. È quello che stavo
+      dicendo, no!? </p>
 
-    <p>Ho capito. Tre applicazioni di afasol, di un’ora l’una. Subito! Che c’è? Ehm.. blinda la supercazzola con scappellamento a sinistra e a destra come se fossero dei pentoloni. Segua col dito. Vede, se va giù non va su. Se va su non va giù. Si faccia aiutare dalla suora. È quello che stavo dicendo, no!? Ah, pardon. Tarapio tapioco come se fosse Antani, la supercazzola prematurata con dominus reveriscum blinda. Come, prego? Tarapio sulla supercazzola con scappellamento destro o sinistra ? Che non si ripeta più, vada pure! Senz'altro!!! Tarapia tapioco! Brematurata la supercazzola o scherziamo? Prego? No, mi permetta. No, io, scusi noi siamo in quattro. </p>
-	</div>
+    <p>Ho capito. Tre applicazioni di afasol, di un’ora l’una. Subito! Che c’è? Ehm.. blinda la supercazzola con
+      scappellamento a sinistra e a destra come se fossero dei pentoloni. Segua col dito. Vede, se va giù non va su. Se
+      va su non va giù. Si faccia aiutare dalla suora. È quello che stavo dicendo, no!? Ah, pardon. Tarapio tapioco come
+      se fosse Antani, la supercazzola prematurata con dominus reveriscum blinda. Come, prego? Tarapio sulla
+      supercazzola con scappellamento destro o sinistra ? Che non si ripeta più, vada pure! Senz'altro!!! Tarapia
+      tapioco! Brematurata la supercazzola o scherziamo? Prego? No, mi permetta. No, io, scusi noi siamo in quattro.
+    </p>
+  </div>
 </body>
+
 </html>
