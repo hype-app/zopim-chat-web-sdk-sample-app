@@ -1,6 +1,6 @@
 import { /* log, */ isAgent, isTrigger, set } from 'utils'
 import { applyMiddleware, createStore, compose } from 'redux'
-import SortedMap from 'collections/sorted-map'
+import sortedMap from 'collections/sorted-map'
 
 const hidePreviousRatingRequest = (chats, action) =>
   chats.map(c => {
@@ -20,7 +20,7 @@ const DEFAULT_STATE = {
   departments: {},
   visitor: {},
   agents: {},
-  chats: SortedMap(),
+  chats: sortedMap(),
   last_timestamp: 0,
   is_chatting: false,
   chatbot: {

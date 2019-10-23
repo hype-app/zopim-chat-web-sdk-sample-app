@@ -48,8 +48,8 @@ class PrechatForm extends Component {
           }
         })
 
-        zChat.sendChatMsg(msg, err => {
-          if (err) log('Error sending message')
+        zChat.sendChatMsg(msg, err2 => {
+          if (err2) log('Error sending message')
         })
       }
     )

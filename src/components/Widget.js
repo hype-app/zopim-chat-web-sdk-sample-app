@@ -98,7 +98,7 @@ class App extends Component {
     )
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (
       location.href.toLowerCase().includes('tutti-i-contatti-dell-assistenza')
     ) {
@@ -110,7 +110,7 @@ class App extends Component {
     this.props.onRef(undefined)
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.data.connection !== 'connected' &&
       nextProps.data.connection === 'connected'
@@ -132,9 +132,7 @@ class App extends Component {
               display_name: nextProps.botName,
               member_type: 'agent',
               timestamp: +new Date(),
-              msg: `Ciao sono ${
-                nextProps.botName
-              } e puoi chiedermi quello che vuoi!`
+              msg: `Ciao sono ${nextProps.botName} e puoi chiedermi quello che vuoi!`
             }
           })
         }
@@ -579,12 +577,20 @@ class App extends Component {
       const schedules =
         zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
 
-      const createReadableDayFromFirstAvailableSchedule = (res, next) => {
-        if (!res && !!schedules[next] && schedules[next].length > 0) {
-          res = next
+      const createReadableDayFromFirstAvailableSchedule = (
+        daysRes,
+        nextSchedule
+      ) => {
+        if (
+          !daysRes &&
+          !!schedules[nextSchedule] &&
+          schedules[nextSchedule].length > 0
+        ) {
+          daysRes = nextSchedule
         }
-        return res
+        return daysRes
       }
+
       const startDay =
         daysMap[
           Object.keys(schedules).reduce(
