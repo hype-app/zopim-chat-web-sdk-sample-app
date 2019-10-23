@@ -9,7 +9,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const config = Object.assign({}, baseConfig, {
-  entry: path.join(__dirname, '../src/index'),
+  entry: ['core-js/stable', path.join(__dirname, '../src/index')],
   cache: false,
   mode: 'production',
   devtool: 'sourcemap',
