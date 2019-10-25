@@ -573,8 +573,19 @@ class App extends Component {
       '6': 'Sabato'
     }
     const zChatOperatorSettings = zChat.getOperatingHours()
-    const schedules =
+    let schedules =
       zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
+
+    if (zChatOperatorSettings.type === 'department') {
+      schedules = Object.keys(schedules).reduce((res, next) => {
+        if (!res) {
+          res = schedules[next]
+        } else {
+          res = Object.keys(res).map(dk => [...res[dk], ...schedules[next][dk]])
+        }
+        return res
+      }, null)
+    }
 
     let groupNames = []
 
@@ -598,52 +609,66 @@ class App extends Component {
       }
     )
 
-    console.log(groupedSchedules)
-
     const readableGroups = Object.keys(groupedSchedules).map(k => {
-      const startDay =
-        daysMap[
-          Object.keys(groupedSchedules[k]).reduce((daysRes, nextSchedule) => {
-            if (
-              !daysRes &&
-              !!groupedSchedules[k][nextSchedule].schedules &&
-              groupedSchedules[k][nextSchedule].schedules.length > 0
-            ) {
-              daysRes = groupedSchedules[k][nextSchedule].day
-            }
-            return daysRes
-          }, null)
-        ]
-      const endDay =
-        daysMap[
-          Object.keys(groupedSchedules[k])
-            .reverse()
-            .reduce((daysRes, nextSchedule) => {
-              if (
-                !daysRes &&
-                !!groupedSchedules[k][nextSchedule].schedules &&
-                groupedSchedules[k][nextSchedule].schedules.length > 0
-              ) {
-                daysRes = groupedSchedules[k][nextSchedule].day
-              }
-              return daysRes
-            }, null)
-        ]
-
-      const startT = new Date()
-      const endT = new Date()
-
-      startT.setHours(0, groupedSchedules[k][0].schedules[0].start, 0, 0)
-      endT.setHours(0, groupedSchedules[k][0].schedules[0].end, 0, 0)
-
-      const startTime = startT.toTimeString().replace(/(\d+\:\d+).*/, '$1')
-      const endTime = endT.toTimeString().replace(/(\d+\:\d+).*/, '$1')
-
-      if (startDay === endDay) {
-        return `il ${startDay} dalle ${startTime} alle ${endTime}`
+      const createReadableDayFromFirstAvailableSchedule = (
+        daysRes,
+        nextSchedule
+      ) => {
+        if (
+          !daysRes &&
+          !!groupedSchedules[k][nextSchedule].schedules &&
+          groupedSchedules[k][nextSchedule].schedules.length > 0
+        ) {
+          daysRes = groupedSchedules[k][nextSchedule].day
+        }
+        return daysRes
       }
 
-      return `dal ${startDay} al ${endDay} dalle ${startTime} alle ${endTime}`
+      const startIndex = Object.keys(groupedSchedules[k]).reduce(
+        createReadableDayFromFirstAvailableSchedule,
+        null
+      )
+
+      const endIndex = Object.keys(groupedSchedules[k])
+        .reverse()
+        .reduce(createReadableDayFromFirstAvailableSchedule, null)
+
+      const startDay = daysMap[startIndex]
+      const endDay = daysMap[endIndex]
+
+      const times = groupedSchedules[k][0].schedules.map(s => {
+        const startT = new Date()
+        const endT = new Date()
+
+        startT.setHours(0, s.start, 0, 0), endT.setHours(0, s.end, 0, 0)
+
+        return {
+          start: startT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
+          end: endT.toTimeString().replace(/(\d+\:\d+).*/, '$1')
+        }
+      })
+
+      console.log(times)
+
+      let phrase
+
+      if (startDay === endDay) {
+        phrase = `${startIndex === '0' ? 'la' : 'il'} ${startDay} `
+      } else {
+        phrase = `${startIndex === '0' ? 'dalla' : 'dal'} ${startDay} ${
+          endIndex === '0' ? 'alla' : 'al'
+        } ${endDay} `
+      }
+
+      return (
+        phrase +
+        times.reduce((res, next, i) => {
+          res = `${res}${i > 0 ? ' e ' : ''}dalle ${next.start} alle ${
+            next.end
+          }`
+          return res
+        }, '')
+      )
     })
 
     return `Puoi chattare con un operatore ${readableGroups.join(
