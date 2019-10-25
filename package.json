@@ -36,6 +36,11 @@
       "git add"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "browserslist": [
     "last 5 versions",
     "ie 6-11"
