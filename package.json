@@ -19,7 +19,6 @@
     "start": "node server.js --env=dev",
     "postinstall": "node tools download-zendesk-sdk",
     "heroku-postbuild": "yarn dist",
-    "precommit": "lint-staged",
     "purge-cdn": "node tools purge-cdn",
     "postpublish": "yarn purge-cdn"
   },
