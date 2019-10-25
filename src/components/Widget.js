@@ -8,7 +8,7 @@ import MessageList from 'components/MessageList'
 import ChatButton from 'components/ChatButton'
 import Input from 'components/Input'
 import { log, get, set, isAgent, isChatBot, anyHumanAgent } from 'utils'
-import { debounce } from 'lodash'
+import { debounce, groupBy } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
 import moment from 'moment'
@@ -563,52 +563,92 @@ class App extends Component {
   }
 
   getOperatorAvailabilityString() {
-    return this.props.data.chatbot.chatOperatorSettings.reduce((res, next) => {
-      const daysMap = {
-        '0': 'Domenica',
-        '1': 'Lunedì',
-        '2': 'Martedì',
-        '3': 'Mercoledì',
-        '4': 'Giovedì',
-        '5': 'Venerdì',
-        '6': 'Sabato'
-      }
-      const zChatOperatorSettings = zChat.getOperatingHours()
-      const schedules =
-        zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
+    const daysMap = {
+      '0': 'Domenica',
+      '1': 'Lunedì',
+      '2': 'Martedì',
+      '3': 'Mercoledì',
+      '4': 'Giovedì',
+      '5': 'Venerdì',
+      '6': 'Sabato'
+    }
+    const zChatOperatorSettings = zChat.getOperatingHours()
+    const schedules =
+      zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
 
-      const createReadableDayFromFirstAvailableSchedule = (
-        daysRes,
-        nextSchedule
-      ) => {
-        if (
-          !daysRes &&
-          !!schedules[nextSchedule] &&
-          schedules[nextSchedule].length > 0
-        ) {
-          daysRes = nextSchedule
+    let groupNames = []
+
+    const groupedSchedules = groupBy(
+      Object.keys(schedules)
+        .map(k => ({
+          day: k,
+          schedules: [...schedules[k]]
+        }))
+        .filter(o => o.schedules.length > 0),
+      o => {
+        const id = `${o.schedules[0].start}-${o.schedules[0].end}`
+        if ((groupNames[groupNames.length - 1] || {}).id !== id) {
+          groupNames = [
+            ...groupNames,
+            { index: `${groupNames.length + 1}`, id }
+          ]
         }
-        return daysRes
-      }
 
+        return groupNames[groupNames.length - 1].index
+      }
+    )
+
+    console.log(groupedSchedules)
+
+    const readableGroups = Object.keys(groupedSchedules).map(k => {
       const startDay =
         daysMap[
-          Object.keys(schedules).reduce(
-            createReadableDayFromFirstAvailableSchedule,
-            null
-          )
+          Object.keys(groupedSchedules[k]).reduce((daysRes, nextSchedule) => {
+            if (
+              !daysRes &&
+              !!groupedSchedules[k][nextSchedule].schedules &&
+              groupedSchedules[k][nextSchedule].schedules.length > 0
+            ) {
+              daysRes = groupedSchedules[k][nextSchedule].day
+            }
+            return daysRes
+          }, null)
         ]
       const endDay =
         daysMap[
-          Object.keys(schedules)
+          Object.keys(groupedSchedules[k])
             .reverse()
-            .reduce(createReadableDayFromFirstAvailableSchedule, null)
+            .reduce((daysRes, nextSchedule) => {
+              if (
+                !daysRes &&
+                !!groupedSchedules[k][nextSchedule].schedules &&
+                groupedSchedules[k][nextSchedule].schedules.length > 0
+              ) {
+                daysRes = groupedSchedules[k][nextSchedule].day
+              }
+              return daysRes
+            }, null)
         ]
-      return `Puoi chattare con un operatore dal ${startDay} al ${endDay}, esclusi i festivi,
-      ${res}${res.length > 0 ? ' o ' : ' '}dalle ${next.startTime} alle ${
-        next.endTime
-      }.`
-    }, '')
+
+      const startT = new Date()
+      const endT = new Date()
+
+      startT.setHours(0, groupedSchedules[k][0].schedules[0].start, 0, 0)
+      endT.setHours(0, groupedSchedules[k][0].schedules[0].end, 0, 0)
+
+      const startTime = startT.toTimeString().replace(/(\d+\:\d+).*/, '$1')
+      const endTime = endT.toTimeString().replace(/(\d+\:\d+).*/, '$1')
+
+      if (startDay === endDay) {
+        return `il ${startDay} dalle ${startTime} alle ${endTime}`
+      }
+
+      return `dal ${startDay} al ${endDay} dalle ${startTime} alle ${endTime}`
+    })
+
+    return `Puoi chattare con un operatore ${readableGroups.join(
+      ', '
+    )}, esclusi i festivi.`
   }
 
   checkOperatorChatState() {
