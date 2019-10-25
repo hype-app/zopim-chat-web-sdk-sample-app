@@ -8,7 +8,7 @@ import MessageList from 'components/MessageList'
 import ChatButton from 'components/ChatButton'
 import Input from 'components/Input'
 import { log, get, set, isAgent, isChatBot, anyHumanAgent } from 'utils'
-import { debounce } from 'lodash'
+import { debounce, groupBy } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
 import moment from 'moment'
@@ -563,52 +563,117 @@ class App extends Component {
   }
 
   getOperatorAvailabilityString() {
-    return this.props.data.chatbot.chatOperatorSettings.reduce((res, next) => {
-      const daysMap = {
-        '0': 'Domenica',
-        '1': 'Lunedì',
-        '2': 'Martedì',
-        '3': 'Mercoledì',
-        '4': 'Giovedì',
-        '5': 'Venerdì',
-        '6': 'Sabato'
-      }
-      const zChatOperatorSettings = zChat.getOperatingHours()
-      const schedules =
-        zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
+    const daysMap = {
+      '0': 'Domenica',
+      '1': 'Lunedì',
+      '2': 'Martedì',
+      '3': 'Mercoledì',
+      '4': 'Giovedì',
+      '5': 'Venerdì',
+      '6': 'Sabato'
+    }
+    const zChatOperatorSettings = zChat.getOperatingHours()
+    let schedules =
+      zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
 
+    if (zChatOperatorSettings.type === 'department') {
+      schedules = Object.keys(schedules).reduce((res, next) => {
+        if (!res) {
+          res = schedules[next]
+        } else {
+          res = Object.keys(res).map(dk => [...res[dk], ...schedules[next][dk]])
+        }
+        return res
+      }, null)
+    }
+
+    let groupNames = []
+
+    const groupedSchedules = groupBy(
+      Object.keys(schedules)
+        .map(k => ({
+          day: k,
+          schedules: [...schedules[k]]
+        }))
+        .filter(o => o.schedules.length > 0),
+      o => {
+        const id = `${o.schedules[0].start}-${o.schedules[0].end}`
+        if ((groupNames[groupNames.length - 1] || {}).id !== id) {
+          groupNames = [
+            ...groupNames,
+            { index: `${groupNames.length + 1}`, id }
+          ]
+        }
+
+        return groupNames[groupNames.length - 1].index
+      }
+    )
+
+    const readableGroups = Object.keys(groupedSchedules).map(k => {
       const createReadableDayFromFirstAvailableSchedule = (
         daysRes,
         nextSchedule
       ) => {
         if (
           !daysRes &&
-          !!schedules[nextSchedule] &&
-          schedules[nextSchedule].length > 0
+          !!groupedSchedules[k][nextSchedule].schedules &&
+          groupedSchedules[k][nextSchedule].schedules.length > 0
         ) {
-          daysRes = nextSchedule
+          daysRes = groupedSchedules[k][nextSchedule].day
         }
         return daysRes
       }
 
-      const startDay =
-        daysMap[
-          Object.keys(schedules).reduce(
-            createReadableDayFromFirstAvailableSchedule,
-            null
-          )
-        ]
-      const endDay =
-        daysMap[
-          Object.keys(schedules)
-            .reverse()
-            .reduce(createReadableDayFromFirstAvailableSchedule, null)
-        ]
-      return `Puoi chattare con un operatore dal ${startDay} al ${endDay}, esclusi i festivi,
-      ${res}${res.length > 0 ? ' o ' : ' '}dalle ${next.startTime} alle ${
-        next.endTime
-      }.`
-    }, '')
+      const startIndex = Object.keys(groupedSchedules[k]).reduce(
+        createReadableDayFromFirstAvailableSchedule,
+        null
+      )
+
+      const endIndex = Object.keys(groupedSchedules[k])
+        .reverse()
+        .reduce(createReadableDayFromFirstAvailableSchedule, null)
+
+      const startDay = daysMap[startIndex]
+      const endDay = daysMap[endIndex]
+
+      const times = groupedSchedules[k][0].schedules.map(s => {
+        const startT = new Date()
+        const endT = new Date()
+
+        startT.setHours(0, s.start, 0, 0), endT.setHours(0, s.end, 0, 0)
+
+        return {
+          start: startT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
+          end: endT.toTimeString().replace(/(\d+\:\d+).*/, '$1')
+        }
+      })
+
+      console.log(times)
+
+      let phrase
+
+      if (startDay === endDay) {
+        phrase = `${startIndex === '0' ? 'la' : 'il'} ${startDay} `
+      } else {
+        phrase = `${startIndex === '0' ? 'dalla' : 'dal'} ${startDay} ${
+          endIndex === '0' ? 'alla' : 'al'
+        } ${endDay} `
+      }
+
+      return (
+        phrase +
+        times.reduce((res, next, i) => {
+          res = `${res}${i > 0 ? ' e ' : ''}dalle ${next.start} alle ${
+            next.end
+          }`
+          return res
+        }, '')
+      )
+    })
+
+    return `Puoi chattare con un operatore ${readableGroups.join(
+      ', '
+    )}, esclusi i festivi.`
   }
 
   checkOperatorChatState() {
