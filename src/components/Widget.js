@@ -11,7 +11,7 @@ import { log, get, set, isAgent, isChatBot, anyHumanAgent } from 'utils'
 import { debounce, groupBy } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
-import moment from 'moment'
+import moment from 'moment-business-days-it'
 import PropTypes from 'prop-types'
 
 const { ENV, THEME } = config
@@ -421,76 +421,22 @@ class App extends Component {
     }
   }
 
-  _parseChatOperatingHours(zChatOperatorSettings, template) {
-    if (!!zChatOperatorSettings) {
-      switch (zChatOperatorSettings.type) {
-        case 'department':
-          return Object.keys(zChatOperatorSettings.department_schedule).map(
-            k => {
-              const startT = new Date()
-              const endT = new Date()
+  getSchedules() {
+    const zChatOperatorSettings = zChat.getOperatingHours()
+    const schedules =
+      zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
 
-              let currDaySettings =
-                zChatOperatorSettings.department_schedule[k][startT.getDay()]
-
-              if (currDaySettings.length === 0) {
-                currDaySettings =
-                  zChatOperatorSettings.department_schedule[k][1]
-              }
-
-              if (currDaySettings.length !== 0) {
-                startT.setHours(0, currDaySettings[0].start, 0, 0)
-                endT.setHours(0, currDaySettings[0].end, 0, 0)
-              }
-
-              return {
-                ...template,
-                startTime: startT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
-                endTime: endT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
-                status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
-              }
-            }
-          )
-        case 'account':
-          return ((startT, endT) => {
-            let currDaySettings =
-              zChatOperatorSettings.account_schedule[startT.getDay()]
-
-            if (currDaySettings.length === 0) {
-              currDaySettings = zChatOperatorSettings.account_schedule[1]
-            }
-
-            if (currDaySettings.length !== 0) {
-              startT.setHours(0, currDaySettings[0].start, 0, 0)
-              endT.setHours(0, currDaySettings[0].end, 0, 0)
-            }
-
-            return [
-              {
-                ...template,
-                startTime: startT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
-                endTime: endT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
-                status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
-              }
-            ]
-          })(new Date(), new Date())
-        default:
-          throw 'unhandled operating hours type'
-      }
-    }
-
-    return ((startT, endT) => {
-      startT.setHours(0, 1, 0, 0)
-      endT.setHours(23, 59, 0, 0)
-
-      return [
-        {
-          ...template,
-          startTime: startT.toTimeString().replace(/(\d+\:\d+).*/, '$1'),
-          endTime: endT.toTimeString().replace(/(\d+\:\d+).*/, '$1')
+    if (zChatOperatorSettings.type === 'department') {
+      return Object.keys(schedules).reduce((res, next) => {
+        if (!res) {
+          res = schedules[next]
+        } else {
+          res = Object.keys(res).map(dk => [...res[dk], ...schedules[next][dk]])
         }
-      ]
-    })(new Date(), new Date())
+        return res
+      }, null)
+    }
+    return schedules
   }
 
   getServicesStatus() {
@@ -500,29 +446,54 @@ class App extends Component {
           x => x.service === 'CHATBOT'
         )
 
-        const chatOperatorSettings = this._parseChatOperatingHours(
-          zChat.getOperatingHours(),
-          json.hypeNoAuthServiceList.find(x => x.service === 'CHAT')
-        )
+        const zChatOperatorSettings = zChat.getOperatingHours()
 
-        const keywords = chatOperatorSettings
-          .reduce((res, next) => {
-            //@hack this merges any local and remote keywords into an unique object
-            //refactor it if it doesn't satisfies the requirements anymore
+        const currClientDate = new Date()
 
-            let remoteKeywords
+        const schedules = this.getSchedules()
 
-            try {
-              remoteKeywords = JSON.parse(next.addtInfo).keywords
-            } catch (e) {
-              remoteKeywords = []
-            }
+        const currDayProperSchedule = schedules[`${currClientDate.getDay()}`]
+          .map(o => {
+            o.startDate = new Date()
+            o.endDate = new Date()
+            o.startDate.setHours(0, o.start, 0, 0)
+            o.endDate.setHours(0, o.end, 0, 0)
+            return o
+          })
+          .find(o => o.startDate < currClientDate && o.endDate > currClientDate)
 
-            return [...new Set([...res, ...remoteKeywords])]
-          }, this.props.keywords)
-          .filter(k => !!k)
+        let chatOperatorSettings = {
+          ...json.hypeNoAuthServiceList.find(x => x.service === 'CHAT'),
+          status: zChatOperatorSettings.enabled ? 'ACTIVE' : 'INACTIVE'
+        }
+        if (!!currDayProperSchedule) {
+          chatOperatorSettings = {
+            ...chatOperatorSettings,
+            startTime: currDayProperSchedule.startDate
+              .toTimeString()
+              .replace(/(\d+\:\d+).*/, '$1'),
+            endTime: currDayProperSchedule.endDate
+              .toTimeString()
+              .replace(/(\d+\:\d+).*/, '$1')
+          }
+        } else {
+          chatOperatorSettings = {
+            ...chatOperatorSettings,
+            startTime: currClientDate
+              .toTimeString()
+              .replace(/(\d+\:\d+).*/, '$1'),
+            endTime: currClientDate.toTimeString().replace(/(\d+\:\d+).*/, '$1')
+          }
+        }
 
-        const clientTime = new Date()
+        const keywords = [
+          ...new Set([
+            ...this.props.keywords.map(k => k.toLowerCase()),
+            ...JSON.parse(chatOperatorSettings.addtInfo).keywords.map(k =>
+              k.toLowerCase()
+            )
+          ])
+        ].filter(k => !!k)
 
         const isBotActive =
           get('chatbotActive') === undefined
@@ -547,7 +518,7 @@ class App extends Component {
             type: 'chat.bot.settings',
             chatOperatorSettings,
             serverToClientTimeSpan:
-              moment(json.serverTime).valueOf() - clientTime.getTime(),
+              moment(json.serverTime).valueOf() - currClientDate.getTime(),
             active: isBotActive,
             minConfidence: Number(chatBotSettings.addtInfo),
             keywords
@@ -572,32 +543,26 @@ class App extends Component {
       '5': 'Venerdì',
       '6': 'Sabato'
     }
-    const zChatOperatorSettings = zChat.getOperatingHours()
-    let schedules =
-      zChatOperatorSettings[`${zChatOperatorSettings.type}_schedule`]
 
-    if (zChatOperatorSettings.type === 'department') {
-      schedules = Object.keys(schedules).reduce((res, next) => {
-        if (!res) {
-          res = schedules[next]
-        } else {
-          res = Object.keys(res).map(dk => [...res[dk], ...schedules[next][dk]])
-        }
-        return res
-      }, null)
-    }
+    const schedules = this.getSchedules()
+
+    const sortedSchedulesKeys = Object.keys(schedules).sort((a, b) => {
+      if (b !== '0') return 0
+      return -1
+    })
 
     let groupNames = []
 
-    const groupedSchedules = groupBy(
-      Object.keys(schedules)
-        .map(k => ({
-          day: k,
-          schedules: [...schedules[k]]
-        }))
-        .filter(o => o.schedules.length > 0),
+    const rawGroupedSchedules = groupBy(
+      sortedSchedulesKeys.map(k => ({
+        day: k,
+        schedules: [...schedules[k]]
+      })),
       o => {
-        const id = `${o.schedules[0].start}-${o.schedules[0].end}`
+        const id = o.schedules.reduce((res, next) => {
+          res += `${next.start}-${next.end}-`
+          return res
+        }, '')
         if ((groupNames[groupNames.length - 1] || {}).id !== id) {
           groupNames = [
             ...groupNames,
@@ -607,6 +572,16 @@ class App extends Component {
 
         return groupNames[groupNames.length - 1].index
       }
+    )
+
+    const groupedSchedules = Object.keys(rawGroupedSchedules).reduce(
+      (res, next) => {
+        if (rawGroupedSchedules[next].some(o => o.schedules.length > 0)) {
+          res[next] = rawGroupedSchedules[next]
+        }
+        return res
+      },
+      {}
     )
 
     const readableGroups = Object.keys(groupedSchedules).map(k => {
@@ -648,8 +623,6 @@ class App extends Component {
         }
       })
 
-      console.log(times)
-
       let phrase
 
       if (startDay === endDay) {
@@ -676,7 +649,18 @@ class App extends Component {
     )}, esclusi i festivi.`
   }
 
-  checkOperatorChatState() {
+  getServerTime() {
+    const clientTime = new Date()
+    //@mock
+    // const clientTime = new Date(
+    //   new Date().toISOString().replace(/.*T/, '2019-11-08T')
+    // )
+    return moment(
+      clientTime.getTime() + this.props.data.chatbot.serverToClientTimeSpan
+    )
+  }
+
+  areOperatorsAvaliable() {
     const processItem = settings => {
       if (!settings)
         return {
@@ -686,17 +670,22 @@ class App extends Component {
 
       try {
         const time = this.getServerTime()
-        const startTime = moment(settings.startTime, 'HH:mm').toDate()
-        const endTime = moment(settings.endTime, 'HH:mm').toDate()
+        const startTime = moment(
+          time.toISOString().replace(/T.*/, ` ${settings.startTime}`)
+        ).toDate()
+        const endTime = moment(
+          time.toISOString().replace(/T.*/, ` ${settings.endTime}`)
+        ).toDate()
 
         const available = this.isServiceActive(settings)
+
+        console.log(moment('2019-21-04').isBusinessDay())
 
         const availableNow =
           available &&
           time.isAfter(startTime) &&
           time.isBefore(endTime) &&
-          // time.day() !== 6 &&
-          time.day() !== 0
+          time.isBusinessDay()
 
         const availableUntil = endTime
 
@@ -714,28 +703,9 @@ class App extends Component {
       }
     }
 
-    return this.props.data.chatbot.chatOperatorSettings.reduce((res, next) => {
-      if (!res.available || !res.availableNow) {
-        res = processItem(next)
-      }
-
-      return res
-    }, {})
-  }
-
-  getServerTime() {
-    const clientTime = new Date()
-    return moment(
-      clientTime.getTime() + this.props.data.chatbot.serverToClientTimeSpan
+    const { available, availableNow, availableUntil } = processItem(
+      this.props.data.chatbot.chatOperatorSettings
     )
-  }
-
-  areOperatorsAvaliable() {
-    const {
-      available,
-      availableNow,
-      availableUntil
-    } = this.checkOperatorChatState()
 
     if (!available) return false
 

@@ -5,7 +5,7 @@ const webpack = require('webpack')
 
 const baseConfig = require('./base')
 const defaultSettings = require('./defaults')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const config = Object.assign({}, baseConfig, {
@@ -39,11 +39,11 @@ const config = Object.assign({}, baseConfig, {
   ],
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
+      new TerserPlugin({
         // cache: true,
         // parallel: true,
         sourceMap: true,
-        uglifyOptions: {
+        terserOptions: {
           mangle: true,
           warnings: false,
           screw_ie8: true, // eslint-disable-line camelcase

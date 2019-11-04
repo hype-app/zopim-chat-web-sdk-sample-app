@@ -4,14 +4,16 @@ function split(arr, predicate) {
       res = [...res, []]
     }
 
-    console.log(res)
-
     res[res.length - 1] = [...res[res.length - 1], next]
 
     return res
   }, [])
 }
 
-const arr = [{ a: '1' }, { a: '1' }, { a: '2' }]
+// @example
+// const arr = [{ a: '1' }, { a: '1' }, { a: '2' }]
+// console.log(split(arr, (prev, next) => !prev || prev.a !== next.a))
 
-console.log(split(arr, (prev, next) => !prev || prev.a !== next.a))
+module.exports = {
+  split
+}
