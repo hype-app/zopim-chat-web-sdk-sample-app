@@ -11,7 +11,7 @@ import { log, get, set, isAgent, isChatBot, anyHumanAgent } from 'utils'
 import { debounce, groupBy } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
-import moment from 'moment'
+import moment from 'moment-business-days-it'
 import PropTypes from 'prop-types'
 
 const { ENV, THEME } = config
@@ -679,8 +679,13 @@ class App extends Component {
 
         const available = this.isServiceActive(settings)
 
+        console.log(moment('2019-21-04').isBusinessDay())
+
         const availableNow =
-          available && time.isAfter(startTime) && time.isBefore(endTime)
+          available &&
+          time.isAfter(startTime) &&
+          time.isBefore(endTime) &&
+          time.isBusinessDay()
 
         const availableUntil = endTime
 
