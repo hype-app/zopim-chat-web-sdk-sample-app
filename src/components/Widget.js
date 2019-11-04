@@ -20,6 +20,10 @@ if (ENV === 'dev') {
   window.zChat = zChat
 }
 
+moment.updateLocale('it', {
+  workingWeekdays: [1, 2, 3, 4, 5, 6]
+})
+
 class App extends Component {
   constructor() {
     super()
@@ -678,8 +682,6 @@ class App extends Component {
         ).toDate()
 
         const available = this.isServiceActive(settings)
-
-        console.log(moment('2019-21-04').isBusinessDay())
 
         const availableNow =
           available &&
