@@ -73,11 +73,12 @@ function downloadZendeskSdk() {
     })
 }
 
-program.version(conf.version).usage('[options] <command>')
+program.version(conf.version).usage('<command>')
 
 program
   .command('purge-cdn')
   .alias('pcdn')
+  .usage('[options]')
   .description('purges the jsdelivr cdn cache')
   .action(() => {
     purgeCdn()
@@ -92,6 +93,7 @@ program
 program
   .command('download-zendesk-sdk')
   .alias('dzs')
+  .usage('[options]')
   .description(
     'downloads the zendesk chat web sdk and places it under the vendor folder'
   )
@@ -105,6 +107,16 @@ program
     console.log()
   })
 
+program.on('command:*', () => {
+  console.error(
+    'Invalid command: %s\nSee --help for a list of available commands.',
+    program.args.join(' ')
+  )
+  process.exit(1)
+})
+
 program.parse(process.argv)
 
-if (program.args.length === 0) program.help()
+if (!process.argv.slice(2).length) {
+  program.help()
+}
