@@ -29,10 +29,9 @@ config.module.rules.push({
   use: {
     loader: 'babel-loader'
   },
-  include: [
-    path.join(__dirname, '/../src'),
-    path.join(__dirname, '/../node_modules/moment-business-days-it')
-  ]
+  include: [].concat(
+    /*config.additionalPaths,*/ [path.join(__dirname, '/../src')]
+  )
 })
 
 module.exports = config
