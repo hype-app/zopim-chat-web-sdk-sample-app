@@ -12,7 +12,7 @@ const config = Object.assign({}, baseConfig, {
   entry: ['core-js/stable', path.join(__dirname, '../src/index')],
   cache: false,
   mode: 'production',
-  devtool: 'sourcemap',
+  devtool: 'hidden-source-map',
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

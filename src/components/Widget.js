@@ -11,7 +11,7 @@ import { log, get, set, isAgent, isChatBot, anyHumanAgent } from 'utils'
 import { debounce, groupBy } from 'lodash'
 import zChat from 'vendor/web-sdk'
 import qnaChat from '../sdk/qna-sdk'
-import moment from 'moment-business-days-it'
+import moment from '../utils/moment-business-days-it'
 import PropTypes from 'prop-types'
 
 const { ENV, THEME } = config
