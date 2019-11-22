@@ -14,7 +14,7 @@ const config = Object.assign({}, baseConfig, {
     './src/index'
   ],
   cache: true,
-  devtool: 'eval-source-map',
+  devtool: 'inline-source-map',
   plugins: [
     new Dotenv(),
     new webpack.HotModuleReplacementPlugin(),
@@ -29,9 +29,10 @@ config.module.rules.push({
   use: {
     loader: 'babel-loader'
   },
-  include: [].concat(
-    /*config.additionalPaths,*/ [path.join(__dirname, '/../src')]
-  )
+  include: [
+    path.join(__dirname, '/../src'),
+    path.join(__dirname, '/../node_modules/moment-business-days-it')
+  ]
 })
 
 module.exports = config
