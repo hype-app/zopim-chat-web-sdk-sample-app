@@ -12,6 +12,7 @@ export default {
   BOT_NAME: process.env.BOT_NAME,
   EMAIL_ADDRESS: process.env.EMAIL_ADDRESS,
   SERVICES_CHECK_URL: process.env.SERVICES_CHECK_URL,
+  SERVICES_CHECK_URL_OPTIONS: process.env.SERVICES_CHECK_URL_OPTIONS,
   SKIN: process.env.SKIN,
   KEYWORDS: ['operatore'],
   // Set to 'docked' or 'normal' for docked or normal mode respectively

@@ -54,7 +54,8 @@ class App extends Component {
     qnaChat.init({
       account_key: this.props.botAccountKey,
       endpoint: this.props.botEndpoint,
-      services_check_url: this.props.servicesCheckUrl
+      services_check_url: this.props.servicesCheckUrl,
+      services_check_url_options: this.props.servicesCheckUrlOptions
     })
     zChat.init({
       account_key: this.props.chatAccountKey
@@ -882,6 +883,7 @@ App.propTypes = {
   botName: PropTypes.string,
   emailAddress: PropTypes.string,
   servicesCheckUrl: PropTypes.string,
+  servicesCheckUrlOptions: PropTypes.object,
   keywords: PropTypes.array
 }
 

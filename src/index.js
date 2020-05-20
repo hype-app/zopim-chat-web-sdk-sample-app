@@ -20,6 +20,7 @@ class ChatWidget extends Component {
     botName = 'Hype Bot',
     emailAddress = 'hello@hype.it',
     servicesCheckUrl = 'https://www.pp-hype.it/api/rest/FREE/services',
+    servicesCheckUrlOptions,
     keywords = ['operatore']
   } = {}) => {
     let widget = document.getElementById(selector)
@@ -40,6 +41,7 @@ class ChatWidget extends Component {
         botName={botName}
         emailAddress={emailAddress}
         servicesCheckUrl={servicesCheckUrl}
+        servicesCheckUrlOptions={servicesCheckUrlOptions}
         keywords={keywords}
       />,
       widget
@@ -66,6 +68,7 @@ class ChatWidget extends Component {
           botName={this.props.botName}
           emailAddress={this.props.emailAddress}
           servicesCheckUrl={this.props.servicesCheckUrl}
+          servicesCheckUrlOptions={this.props.servicesCheckUrlOptions}
           keywords={this.props.keywords}
         />
       </Provider>
@@ -82,6 +85,7 @@ ChatWidget.propTypes = {
   botName: PropTypes.string,
   emailAddress: PropTypes.string,
   servicesCheckUrl: PropTypes.string,
+  servicesCheckUrlOptions: PropTypes.object,
   keywords: PropTypes.array
 }
 
@@ -96,6 +100,7 @@ if (process.env.SCOPE === 'demo') {
       BOT_NAME: botName,
       EMAIL_ADDRESS: emailAddress,
       SERVICES_CHECK_URL: servicesCheckUrl,
+      SERVICES_CHECK_URL_OPTIONS: servicesCheckUrlOptions,
       SKIN: theme,
       KEYWORDS: keywords
     } = config
@@ -109,6 +114,9 @@ if (process.env.SCOPE === 'demo') {
       botName,
       emailAddress,
       servicesCheckUrl,
+      servicesCheckUrlOptions: !!servicesCheckUrlOptions
+        ? JSON.parse(servicesCheckUrlOptions)
+        : undefined,
       keywords
     })
   }
