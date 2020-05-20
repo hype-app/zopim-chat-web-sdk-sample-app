@@ -16,3 +16,9 @@ $theme-color: $hype-theme-color;
   $theme-color: $tim-theme-color;
   @import 'themes/_base';
 }
+
+.dots {
+  $theme-font: $dots-theme-font;
+  $theme-color: $dots-theme-color;
+  @import 'themes/_base';
+}
